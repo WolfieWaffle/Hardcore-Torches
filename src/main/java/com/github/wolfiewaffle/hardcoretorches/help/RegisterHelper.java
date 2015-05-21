@@ -1,4 +1,4 @@
-package com.github.wolfiewaffle.equivlentalchemy.help;
+package com.github.wolfiewaffle.hardcoretorches.help;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;

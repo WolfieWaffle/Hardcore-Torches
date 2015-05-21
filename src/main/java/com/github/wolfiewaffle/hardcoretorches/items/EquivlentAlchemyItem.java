@@ -1,6 +1,6 @@
-package com.github.wolfiewaffle.equivlentalchemy.items;
+package com.github.wolfiewaffle.hardcoretorches.items;
 
-import com.github.wolfiewaffle.equivlentalchemy.help.Reference;
+import com.github.wolfiewaffle.hardcoretorches.help.Reference;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

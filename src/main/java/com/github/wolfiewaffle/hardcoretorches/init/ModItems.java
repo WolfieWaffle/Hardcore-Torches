@@ -1,9 +1,9 @@
-package com.github.wolfiewaffle.equivlentalchemy.init;
+package com.github.wolfiewaffle.hardcoretorches.init;
 
 import net.minecraft.item.Item;
 
-import com.github.wolfiewaffle.equivlentalchemy.help.RegisterHelper;
-import com.github.wolfiewaffle.equivlentalchemy.items.EquivlentAlchemyItem;
+import com.github.wolfiewaffle.hardcoretorches.help.RegisterHelper;
+import com.github.wolfiewaffle.hardcoretorches.items.EquivlentAlchemyItem;
 
 public class ModItems
 {
