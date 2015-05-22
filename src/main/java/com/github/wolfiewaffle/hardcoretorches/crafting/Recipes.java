@@ -11,6 +11,6 @@ public class Recipes
 {
 	public static void init()
 	{
-		GameRegistry.addShapedRecipe(new ItemStack(ModItems.philosophersStone), new Object[] {"ABA", "BCB", "ABA", 'A', Items.snowball, 'B', Items.snowball, 'C', Items.diamond});
+		GameRegistry.addShapedRecipe(new ItemStack(ModItems.animalFat), new Object[] {"ABA", "BCB", "ABA", 'A', Items.snowball, 'B', Items.snowball, 'C', Items.diamond});
 	}
 }

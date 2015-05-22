@@ -8,11 +8,10 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class EquivlentAlchemyItem extends Item
+public class ItemAnimalFat extends Item
 {
-	public EquivlentAlchemyItem()
+	public ItemAnimalFat()
 	{
-		super();
 		setCreativeTab(CreativeTabs.tabMisc);
 	}
 	

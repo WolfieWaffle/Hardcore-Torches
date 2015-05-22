@@ -1,4 +1,6 @@
 item.philosophersStone.name=Tutorial Item
+item.animalFat.name=Animal Fat
 
 tile.torchLit.name=Lit Torch
 tile.torchUnlit.name=Unlit Torch
+tile.torchBurnt.name=Burnt Torch

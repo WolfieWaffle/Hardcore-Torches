@@ -3,13 +3,15 @@ package com.github.wolfiewaffle.hardcoretorches.init;
 import net.minecraft.item.Item;
 
 import com.github.wolfiewaffle.hardcoretorches.help.RegisterHelper;
-import com.github.wolfiewaffle.hardcoretorches.items.EquivlentAlchemyItem;
+import com.github.wolfiewaffle.hardcoretorches.items.ItemAnimalFat;
 
 public class ModItems
 {
-	public static Item philosophersStone = new EquivlentAlchemyItem().setUnlocalizedName("philosophersStone");
+	public static Item itemHardcoreTorches = new ItemAnimalFat().setUnlocalizedName("itemHardcoreTorches");
+	public static Item animalFat = new ItemAnimalFat().setUnlocalizedName("animalFat");
 	public static void init()
 	{
-		RegisterHelper.registerItem(philosophersStone);
+		RegisterHelper.registerItem(itemHardcoreTorches);
+		RegisterHelper.registerItem(animalFat);
 	}
 }
