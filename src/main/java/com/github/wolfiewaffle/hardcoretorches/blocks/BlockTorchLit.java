@@ -3,30 +3,41 @@ package com.github.wolfiewaffle.hardcoretorches.blocks;
 import java.util.Random;
 
 import net.minecraft.block.BlockTorch;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.github.wolfiewaffle.hardcoretorches.help.Reference;
 import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
+import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchLit;
 
-public class BlockTorchLit extends BlockTorch
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 {
 	public BlockTorchLit()
 	{
 		super();
-		this.setStepSound(soundTypeStone);
 		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setStepSound(soundTypeStone);
 		this.setBlockName("torchLit");
 		this.setLightLevel(0.8f);
 		this.setBlockTextureName(Reference.MODID + ":" + getUnlocalizedName().substring(5));
 	}
 	
-	@Override
 	public void updateTick(World world, int i, int j, int k, Random rand)
 	{
-		if((world.rand.nextInt(100) == 0 || (world.isRaining() && world.canBlockSeeTheSky(i, j, k))))
+		if((world.isRaining() && world.canBlockSeeTheSky(i, j, k)))
 		{
+	        world.spawnParticle("smoke", i, j, k, 0.5D, 0.7D, 0.5D);
+			
 			world.playSoundEffect((double)i + 0.5D, (double)j + 0.5D, (double)k + 0.5D, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
+			
 			world.setBlock(i, j, k, ModBlocks.torchUnlit, world.getBlockMetadata(i, j, k), 3);
 			
 			int l = world.getBlockMetadata(i, j, k);
@@ -70,4 +81,38 @@ public class BlockTorchLit extends BlockTorch
 			return;
 		}
 	}
+	
+	@SideOnly(Side.CLIENT)
+    public void randomDisplayTick(World p_149734_1_, int p_149734_2_, int p_149734_3_, int p_149734_4_, Random p_149734_5_)
+    {
+		
+    }
+	
+	@Override
+	public TileEntity createNewTileEntity(World world, int meta) {
+        return new TileEntityTorchLit();
+    }
+    
+    public boolean hasTileEntity(int metadata) {
+        return true;
+    }
+    
+    @Override
+    public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer player, int meta, float par7, float par8, float par9) {
+    	TileEntity te = world.getTileEntity(i, j, k);
+    	
+    	if(te instanceof TileEntityTorchLit) {
+    		System.out.println(((TileEntityTorchLit)te).getFuelAmount());
+    	}
+    	
+		return true;
+    }
+    
+    @Override
+    public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase player, ItemStack itemstack) {
+    	TileEntity te = world.getTileEntity(i, j, k);
+    	int meta = itemstack.getItemDamage();
+    	
+    	((TileEntityTorchLit)te).setFuel(meta);
+    }
 }

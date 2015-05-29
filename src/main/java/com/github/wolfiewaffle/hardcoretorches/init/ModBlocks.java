@@ -6,6 +6,9 @@ import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchBurnt;
 import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLit;
 import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchUnlit;
 import com.github.wolfiewaffle.hardcoretorches.help.RegisterHelper;
+import com.github.wolfiewaffle.hardcoretorches.items.ItemBlockTorchLit;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModBlocks
 {
@@ -14,7 +17,7 @@ public class ModBlocks
 	public static Block torchBurnt  = new BlockTorchBurnt();
 	public static void init()
 	{
-		RegisterHelper.registerBlock(torchLit);
+		GameRegistry.registerBlock(torchLit, ItemBlockTorchLit.class, "test");
 		RegisterHelper.registerBlock(torchUnlit);
 		RegisterHelper.registerBlock(torchBurnt);
 	}
