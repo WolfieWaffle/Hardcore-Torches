@@ -1,11 +1,9 @@
 package com.github.wolfiewaffle.hardcoretorches.tileentities;
 
+import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLit;
 import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
-import com.github.wolfiewaffle.hardcoretorches.items.ItemBlockTorchLit;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 
 public class TileEntityTorchLit extends TileEntity 
 {
@@ -16,10 +14,14 @@ public class TileEntityTorchLit extends TileEntity
     	return name;
     }
     
-    private int torchFuel;
+    private int torchFuel = BlockTorchLit.MAX_FUEL;
     
     public int getFuelAmount() {
 		return this.torchFuel;
+	}
+
+	public void setFuel(int f) {
+		this.torchFuel = f;
 	}
     
     @Override
@@ -36,22 +38,14 @@ public class TileEntityTorchLit extends TileEntity
     
     @Override
     public void updateEntity() {
-		int i = this.xCoord;
-		int j = this.yCoord;
-		int k = this.zCoord;
-		World world = this.worldObj;
-		
-		if (torchFuel < ItemBlockTorchLit.getTorchMaxDamage()) {
-			torchFuel = torchFuel - 1;
-		}
-		else if (torchFuel == ItemBlockTorchLit.getTorchMaxDamage()) {
-    		this.worldObj.setBlock(i, j, k, ModBlocks.torchBurnt, world.getBlockMetadata(i, j, k), 3);
-    	}
-    	
-    	System.out.println(/*"fuel: " + */torchFuel/* + " xyz: " + i + " " + j + " " + k*/);
-    }
+		if (worldObj.isRemote){ return; }
 
-	public void setFuel(int f) {
-		this.torchFuel = f;
-	}
+		torchFuel = torchFuel - 1; // Decrement the torch fuel
+		markDirty();
+
+		if (torchFuel < 0) { // If the new fuel value is less than 0, replace the block with a Burnt Torch
+			System.out.printf("Torch at %d,%d,%d has burnt (fuel %d)\n", xCoord, yCoord, zCoord, torchFuel);
+    		this.worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.torchBurnt, worldObj.getBlockMetadata(xCoord, yCoord, zCoord), 3);
+    	}
+    }
 }

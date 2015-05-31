@@ -1,33 +1,27 @@
 package com.github.wolfiewaffle.hardcoretorches.items;
 
+import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLit;
+import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
-
 public class ItemBlockTorchLit extends ItemBlock
 {
-	private static int maxDamage = 1000;
-	
-	public static int getTorchMaxDamage() {
-		return maxDamage;
-	}
-	
 	public ItemBlockTorchLit(Block block) {
 		super(block);
-		this.setMaxDamage(maxDamage);
+		setMaxDamage(BlockTorchLit.MAX_FUEL);
 	}
-	
+
+	@Override
 	public void onUpdate(ItemStack itemstack, World world, Entity player, int p0, boolean p1) {
-		int damage = getDamage(itemstack);
-		int maxdamage = getMaxDamage(itemstack);
-		if (damage < maxdamage) {
-			setDamage(itemstack, (damage += 1));
-		} else if (damage == maxdamage) {
-			itemstack.func_150996_a(getItemFromBlock(ModBlocks.torchBurnt));
-		};
+		setDamage(itemstack, getDamage(itemstack) + 1); // Increment the damage
+
+		if (getDamage(itemstack) > getMaxDamage(itemstack)){ // If the new damage is greater than the max damage, replace the item with a Burnt Torch
+			itemstack.func_150996_a(Item.getItemFromBlock(ModBlocks.torchBurnt));
+		}
 	}
 }
