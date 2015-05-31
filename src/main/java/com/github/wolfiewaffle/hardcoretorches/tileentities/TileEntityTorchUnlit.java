@@ -1,20 +1,21 @@
 package com.github.wolfiewaffle.hardcoretorches.tileentities;
 
-import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLit;
-import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityTorchLit extends TileEntity 
+import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchUnlit;
+import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
+
+public class TileEntityTorchUnlit extends TileEntity 
 {
-	public static final String publicName = "tileEntityTorchLit";
-    private String name = "tileEntityTorchLit";
+	public static final String publicName = "tileEntityTorchUnlit";
+    private String name = "tileEntityTorchUnlit";
     
     public String getName() {
     	return name;
     }
     
-    private int torchFuel = BlockTorchLit.MAX_FUEL;
+    private int torchFuel = BlockTorchUnlit.MAX_FUEL;
     
     public int getFuelAmount() {
 		return this.torchFuel;
@@ -40,7 +41,7 @@ public class TileEntityTorchLit extends TileEntity
     public void updateEntity() {
 		if (worldObj.isRemote){ return; }
 		
-		torchFuel = torchFuel - 1; // Decrement the torch fuel
+		//torchFuel = torchFuel - 1; // Decrement the torch fuel
 		markDirty();
 		
 		if (torchFuel < 0) { // If the new fuel value is less than 0, replace the block with a Burnt Torch
