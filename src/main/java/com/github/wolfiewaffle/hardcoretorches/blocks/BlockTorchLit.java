@@ -114,6 +114,7 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
     	int itemMeta = itemstack.getItemDamage();
 
 		// Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
+		// itemDamage + fuel = MAX_FUEL
     	te.setFuel(MAX_FUEL - itemMeta);
     }
     
@@ -123,7 +124,8 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 		TileEntityTorchLit te = getTileEntity(world, x, y, z);
 
 		// Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
-		int itemMeta = te.getFuelAmount() - MAX_FUEL;
+		// itemDamage + fuel = MAX_FUEL
+		int itemMeta = MAX_FUEL - te.getFuelAmount();
 
 		ArrayList<ItemStack> drop = new ArrayList<ItemStack>();
 		drop.add(new ItemStack(getItemDropped(metadata, world.rand, fortune), quantityDropped(metadata, fortune, world.rand), itemMeta));
