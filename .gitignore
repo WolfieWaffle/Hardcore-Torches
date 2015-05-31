@@ -3,6 +3,12 @@ eclipse
 *.iml
 *.ipr
 *.iws
+saves/
+logs/
+config/
+crash-reports/
+options.txt
+usernamecache.json
 
 #################
 ## Eclipse
