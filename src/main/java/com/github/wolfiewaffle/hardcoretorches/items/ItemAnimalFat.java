@@ -12,7 +12,8 @@ public class ItemAnimalFat extends Item
 {
 	public ItemAnimalFat()
 	{
-		setCreativeTab(CreativeTabs.tabMisc);
+		this.setCreativeTab(CreativeTabs.tabMisc);
+		//this.setMaxDamage(10);
 	}
 	
 	@SideOnly(Side.CLIENT)

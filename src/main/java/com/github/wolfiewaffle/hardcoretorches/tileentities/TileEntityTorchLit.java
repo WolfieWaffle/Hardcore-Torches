@@ -42,7 +42,7 @@ public class TileEntityTorchLit extends TileEntity
 		World world = this.worldObj;
 		
 		if (torchFuel < ItemBlockTorchLit.getTorchMaxDamage()) {
-			torchFuel = torchFuel + 1;
+			torchFuel = torchFuel - 1;
 		}
 		else if (torchFuel == ItemBlockTorchLit.getTorchMaxDamage()) {
     		this.worldObj.setBlock(i, j, k, ModBlocks.torchBurnt, world.getBlockMetadata(i, j, k), 3);

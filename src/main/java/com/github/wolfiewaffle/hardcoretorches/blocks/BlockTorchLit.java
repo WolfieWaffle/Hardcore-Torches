@@ -1,5 +1,6 @@
 package com.github.wolfiewaffle.hardcoretorches.blocks;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.BlockTorch;
@@ -7,6 +8,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -114,5 +116,29 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
     	int meta = itemstack.getItemDamage();
     	
     	((TileEntityTorchLit)te).setFuel(meta);
+    }
+    
+    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
+    {
+    	return Item.getItemFromBlock(ModBlocks.torchLit);
+    }
+    
+    
+    @Override
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+    {
+        ArrayList<ItemStack> drop = new ArrayList<ItemStack>();
+        
+        TileEntity te = world.getTileEntity(x, y, z);
+        int count = quantityDropped(metadata, fortune, world.rand);
+        for(int i = 0; i < count; i++)
+        {
+            Item item = getItemDropped(((TileEntityTorchLit)te).getFuelAmount(), world.rand, fortune);
+            if (item != null)
+            {
+                drop.add(new ItemStack(item, 2, ((TileEntityTorchLit)te).getFuelAmount()));
+            }
+        }
+        return drop;
     }
 }
