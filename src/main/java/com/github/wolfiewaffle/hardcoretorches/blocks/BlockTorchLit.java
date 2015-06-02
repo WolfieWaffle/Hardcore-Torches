@@ -8,6 +8,9 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -15,6 +18,7 @@ import net.minecraft.world.World;
 import com.github.wolfiewaffle.hardcoretorches.help.Reference;
 import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchLit;
+import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchUnlit;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,7 +26,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 {
 	// The maximum fuel of a Lit Torch
-	public static final int MAX_FUEL = 1000;
+	public static final int MAX_FUEL = 2400;
 	
 	//Constructor
 	public BlockTorchLit() {
@@ -33,6 +37,11 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 		this.setLightLevel(0.8f);
 		this.setBlockTextureName(Reference.MODID + ":" + getUnlocalizedName().substring(5));
 	}
+	
+	public int tickRate()
+    {
+	    return 200;
+    }
 	
 	//Particles and burning out
 	public void updateTick(World world, int i, int j, int k, Random rand) {
@@ -99,7 +108,29 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 			TileEntityTorchLit te = getTileEntity(world, x, y, z);
 			System.out.printf("Right click. Fuel: %d\n", te.getFuelAmount());
 		}
-    	
+		
+		//Light torch
+		if (player.inventory.getCurrentItem() != null)
+		{
+			if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(Blocks.wool))
+			{
+				int l = world.getBlockMetadata(x, y, z);
+		        double d0 = (double)((float)x + 0.5F);
+		        double d1 = (double)((float)y + 0.7F);
+		        double d2 = (double)((float)z + 0.5F);
+		        
+		        int oldFuel = ((TileEntityTorchLit)world.getTileEntity(x, y, z)).getFuelAmount();
+				world.setBlock(x, y, z, ModBlocks.torchUnlit, l, 3);
+				world.playSoundEffect(d0, d1, d2, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
+		        TileEntity te2 = (TileEntityTorchUnlit)world.getTileEntity(x, y, z);
+		        ((TileEntityTorchUnlit)te2).setFuel(oldFuel);
+			}
+			
+			if (player.inventory.getCurrentItem().getItem() == Items.flint && !player.capabilities.isCreativeMode)
+			{
+				player.inventory.decrStackSize(player.inventory.currentItem, 1);
+			}
+		}
 		return true;
     }
     

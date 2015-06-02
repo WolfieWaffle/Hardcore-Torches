@@ -44,7 +44,7 @@ public class TileEntityTorchUnlit extends TileEntity
 		//torchFuel = torchFuel - 1; // Decrement the torch fuel
 		markDirty();
 		
-		if (torchFuel < 0) { // If the new fuel value is less than 0, replace the block with a Burnt Torch
+		if (torchFuel <= 0) { // If the new fuel value is less than 0, replace the block with a Burnt Torch
 			System.out.printf("Torch at %d,%d,%d has burnt (fuel %d)\n", xCoord, yCoord, zCoord, torchFuel);
     		this.worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.torchBurnt, worldObj.getBlockMetadata(xCoord, yCoord, zCoord), 3);
     	}

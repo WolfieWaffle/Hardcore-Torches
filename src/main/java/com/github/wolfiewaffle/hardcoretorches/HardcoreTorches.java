@@ -1,6 +1,9 @@
 package com.github.wolfiewaffle.hardcoretorches;
 
+import net.minecraftforge.common.MinecraftForge;
+
 import com.github.wolfiewaffle.hardcoretorches.crafting.Recipes;
+import com.github.wolfiewaffle.hardcoretorches.handlers.DropHandler;
 import com.github.wolfiewaffle.hardcoretorches.help.Reference;
 import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 import com.github.wolfiewaffle.hardcoretorches.init.ModItems;
@@ -30,6 +33,7 @@ public class HardcoreTorches
 	public void Init(FMLInitializationEvent event)
 	{
 		Recipes.init();
+		MinecraftForge.EVENT_BUS.register(new DropHandler());
 	}
 	
 	@Mod.EventHandler

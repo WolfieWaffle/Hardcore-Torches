@@ -9,6 +9,7 @@ public class TileEntityTorchLit extends TileEntity
 {
 	public static final String publicName = "tileEntityTorchLit";
     private String name = "tileEntityTorchLit";
+    private int tickCounter = 0; 
     
     public String getName() {
     	return name;
@@ -38,14 +39,22 @@ public class TileEntityTorchLit extends TileEntity
     
     @Override
     public void updateEntity() {
-		if (worldObj.isRemote){ return; }
+		if (worldObj.isRemote){return;}
+		tickCounter ++;
 		
-		torchFuel = torchFuel - 1; // Decrement the torch fuel
-		markDirty();
-		
-		if (torchFuel < 0) { // If the new fuel value is less than 0, replace the block with a Burnt Torch
-			System.out.printf("Torch at %d,%d,%d has burnt (fuel %d)\n", xCoord, yCoord, zCoord, torchFuel);
-    		this.worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.torchBurnt, worldObj.getBlockMetadata(xCoord, yCoord, zCoord), 3);
-    	}
+		if (tickCounter == 20) {
+			// Decrement the torch fuel
+			torchFuel = torchFuel - 1;
+			// Mark that the value has changed
+			markDirty();
+			
+			// If the new fuel value is less than 0, replace the block with a Burnt Torch
+			if (torchFuel < 0) {
+				System.out.printf("Torch at %d,%d,%d has burnt (fuel %d)\n", xCoord, yCoord, zCoord, torchFuel);
+	    		this.worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.torchBurnt, worldObj.getBlockMetadata(xCoord, yCoord, zCoord), 3);
+	    	}
+			
+			tickCounter = 0;
+		} else {}
     }
 }

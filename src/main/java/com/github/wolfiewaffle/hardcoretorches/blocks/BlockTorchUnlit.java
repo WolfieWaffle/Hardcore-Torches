@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 
 import com.github.wolfiewaffle.hardcoretorches.help.Reference;
 import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
+import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchLit;
 import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchUnlit;
 
 import cpw.mods.fml.relauncher.Side;
@@ -24,7 +25,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockTorchUnlit extends BlockTorch implements ITileEntityProvider
 {
 	// The maximum fuel of a Lit Torch
-	public static final int MAX_FUEL = 1000;
+	public static final int MAX_FUEL = BlockTorchLit.MAX_FUEL;
 	
 	public BlockTorchUnlit()
 	{
@@ -80,7 +81,7 @@ public class BlockTorchUnlit extends BlockTorch implements ITileEntityProvider
 		// Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
 		// itemDamage + fuel = MAX_FUEL
 		int itemMeta = MAX_FUEL - te.getFuelAmount();
-
+		
 		ArrayList<ItemStack> drop = new ArrayList<ItemStack>();
 		drop.add(new ItemStack(getItemDropped(metadata, world.rand, fortune), quantityDropped(metadata, fortune, world.rand), itemMeta));
 		return drop;
@@ -107,45 +108,60 @@ public class BlockTorchUnlit extends BlockTorch implements ITileEntityProvider
 		        double d3 = 0.2199999988079071D;
 		        double d4 = 0.27000001072883606D;
 		        
-				if		(l == 1)
+				if (l == 1)
 				{
-					world.setBlock(x, y, z, ModBlocks.torchLit, 1, 3);
+					int oldFuel = ((TileEntityTorchUnlit)world.getTileEntity(x, y, z)).getFuelAmount();
+					world.setBlock(x, y, z, ModBlocks.torchLit, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 						world.spawnParticle("smoke", d0 - d4, d1 + d3, d2, 0.0D, 0.0D, 0.0D);   
 			        }
+			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
+			        ((TileEntityTorchLit)te2).setFuel(oldFuel);
 				}
 				else if (l == 2)
 				{
-					world.setBlock(x, y, z, ModBlocks.torchLit, 2, 3);
+					int oldFuel = ((TileEntityTorchUnlit)world.getTileEntity(x, y, z)).getFuelAmount();
+					world.setBlock(x, y, z, ModBlocks.torchLit, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 			        	world.spawnParticle("smoke", d0 + d4, d1 + d3, d2, 0.0D, 0.0D, 0.0D);
 			        }
+			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
+			        ((TileEntityTorchLit)te2).setFuel(oldFuel);
 				}
 				else if (l == 3)
 				{
-					world.setBlock(x, y, z, ModBlocks.torchLit, 3, 3);
+					int oldFuel = ((TileEntityTorchUnlit)world.getTileEntity(x, y, z)).getFuelAmount();
+					world.setBlock(x, y, z, ModBlocks.torchLit, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 			        	world.spawnParticle("smoke", d0, d1 + d3, d2 - d4, 0.0D, 0.0D, 0.0D);
 			        }
+			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
+			        ((TileEntityTorchLit)te2).setFuel(oldFuel);
 				}
 				else if (l == 4)
 				{
-					world.setBlock(x, y, z, ModBlocks.torchLit, 4, 3);
+					int oldFuel = ((TileEntityTorchUnlit)world.getTileEntity(x, y, z)).getFuelAmount();
+					world.setBlock(x, y, z, ModBlocks.torchLit, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 			        	world.spawnParticle("smoke", d0, d1 + d3, d2 + d4, 0.0D, 0.0D, 0.0D);
 			        }
+			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
+			        ((TileEntityTorchLit)te2).setFuel(oldFuel);
 				}
 				else
 				{
-					world.setBlock(x, y, z, ModBlocks.torchLit, 0, 3);
+					int oldFuel = ((TileEntityTorchUnlit)world.getTileEntity(x, y, z)).getFuelAmount();
+					world.setBlock(x, y, z, ModBlocks.torchLit, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 			        	world.spawnParticle("smoke", d0, d1, d2, 0.0D, 0.0D, 0.0D);
 			        }
+			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
+			        ((TileEntityTorchLit)te2).setFuel(oldFuel);
 				};
 			}
 			
