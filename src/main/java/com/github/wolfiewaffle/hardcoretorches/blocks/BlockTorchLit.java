@@ -9,7 +9,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -38,26 +37,22 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 		this.setBlockTextureName(Reference.MODID + ":" + getUnlocalizedName().substring(5));
 	}
 	
-	public int tickRate()
-    {
-	    return 200;
-    }
-	
 	//Particles and burning out
-	public void updateTick(World world, int i, int j, int k, Random rand) {
-		if((world.isRaining() && world.canBlockSeeTheSky(i, j, k))) {
-	        world.spawnParticle("smoke", i, j, k, 0.5D, 0.7D, 0.5D);
-			
-			world.playSoundEffect((double)i + 0.5D, (double)j + 0.5D, (double)k + 0.5D, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
-			
-			world.setBlock(i, j, k, ModBlocks.torchUnlit, world.getBlockMetadata(i, j, k), 3);
-			
-			int l = world.getBlockMetadata(i, j, k);
-	        double d0 = (double)((float)i + 0.5F);
-	        double d1 = (double)((float)j + 0.7F);
-	        double d2 = (double)((float)k + 0.5F);
+	public void updateTick(World world, int x, int y, int z, Random rand) {
+		if((world.isRaining() && world.canBlockSeeTheSky(x, y, z))) {
+	        
+			int l = world.getBlockMetadata(x, y, z);
+	        double d0 = (double)((float)x + 0.5F);
+	        double d1 = (double)((float)y + 0.7F);
+	        double d2 = (double)((float)z + 0.5F);
 	        double d3 = 0.2199999988079071D;
 	        double d4 = 0.27000001072883606D;
+	        
+	        int oldFuel = ((TileEntityTorchLit)world.getTileEntity(x, y, z)).getFuelAmount();
+			world.setBlock(x, y, z, ModBlocks.torchUnlit, l, 3);
+			world.playSoundEffect(d0, d1, d2, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
+	        TileEntity te2 = (TileEntityTorchUnlit)world.getTileEntity(x, y, z);
+	        ((TileEntityTorchUnlit)te2).setFuel(oldFuel);
 	        
 			if (l == 1) {
 		        for(int c = 1; c < 10+1; c++) {
@@ -109,10 +104,11 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 			System.out.printf("Right click. Fuel: %d\n", te.getFuelAmount());
 		}
 		
-		//Light torch
+		//Extinguish torch
 		if (player.inventory.getCurrentItem() != null)
 		{
-			if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(Blocks.wool))
+			if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(Blocks.wool) ||
+				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(Blocks.carpet))
 			{
 				int l = world.getBlockMetadata(x, y, z);
 		        double d0 = (double)((float)x + 0.5F);
@@ -126,7 +122,8 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 		        ((TileEntityTorchUnlit)te2).setFuel(oldFuel);
 			}
 			
-			if (player.inventory.getCurrentItem().getItem() == Items.flint && !player.capabilities.isCreativeMode)
+			if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(Blocks.wool) ||
+				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(Blocks.carpet))
 			{
 				player.inventory.decrStackSize(player.inventory.currentItem, 1);
 			}
@@ -167,7 +164,7 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 		// Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
 		// itemDamage + fuel = MAX_FUEL
 		int itemMeta = MAX_FUEL - te.getFuelAmount();
-
+		
 		ArrayList<ItemStack> drop = new ArrayList<ItemStack>();
 		drop.add(new ItemStack(getItemDropped(metadata, world.rand, fortune), quantityDropped(metadata, fortune, world.rand), itemMeta));
 		return drop;

@@ -59,34 +59,6 @@ public class BlockTorchUnlit extends BlockTorch implements ITileEntityProvider
     	te.setFuel(MAX_FUEL - itemMeta);
     }
     
-    @Override
-    public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest) {
-      if(willHarvest) {
-        return true;
-      }
-      return super.removedByPlayer(world, player, x, y, z, willHarvest);
-    }
-    
-    @Override
-    public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta) {
-      super.harvestBlock(world, player, x, y, z, meta);
-      world.setBlockToAir(x, y, z);
-    }
-    
-    @Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
-    {
-		TileEntityTorchUnlit te =  getTileEntity(world, x, y, z);
-		
-		// Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
-		// itemDamage + fuel = MAX_FUEL
-		int itemMeta = MAX_FUEL - te.getFuelAmount();
-		
-		ArrayList<ItemStack> drop = new ArrayList<ItemStack>();
-		drop.add(new ItemStack(getItemDropped(metadata, world.rand, fortune), quantityDropped(metadata, fortune, world.rand), itemMeta));
-		return drop;
-    }
-    
     //Right click
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9) {
 		//Debug
@@ -172,4 +144,32 @@ public class BlockTorchUnlit extends BlockTorch implements ITileEntityProvider
 		}
 		return true;
 	}
+	
+    @Override
+    public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest) {
+      if(willHarvest) {
+        return true;
+      }
+      return super.removedByPlayer(world, player, x, y, z, willHarvest);
+    }
+    
+    @Override
+    public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta) {
+      super.harvestBlock(world, player, x, y, z, meta);
+      world.setBlockToAir(x, y, z);
+    }
+    
+    @Override
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+    {
+		TileEntityTorchUnlit te =  getTileEntity(world, x, y, z);
+		
+		// Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
+		// itemDamage + fuel = MAX_FUEL
+		int itemMeta = MAX_FUEL - te.getFuelAmount();
+		
+		ArrayList<ItemStack> drop = new ArrayList<ItemStack>();
+		drop.add(new ItemStack(getItemDropped(metadata, world.rand, fortune), quantityDropped(metadata, fortune, world.rand), itemMeta));
+		return drop;
+    }
 }

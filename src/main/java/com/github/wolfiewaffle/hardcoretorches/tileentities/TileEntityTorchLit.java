@@ -34,7 +34,7 @@ public class TileEntityTorchLit extends TileEntity
     @Override
     public void readFromNBT(NBTTagCompound par1) {
        super.readFromNBT(par1);
-       this.torchFuel = par1.getInteger("torchfuelNBT");
+       this.torchFuel = par1.getInteger("torchFuelNBT");
     }
     
     @Override
