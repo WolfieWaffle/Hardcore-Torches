@@ -5,8 +5,6 @@ import net.minecraft.block.Block;
 import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchBurnt;
 import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLit;
 import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchUnlit;
-import com.github.wolfiewaffle.hardcoretorches.help.Reference;
-import com.github.wolfiewaffle.hardcoretorches.help.RegisterHelper;
 import com.github.wolfiewaffle.hardcoretorches.items.ItemBlockTorchLit;
 import com.github.wolfiewaffle.hardcoretorches.items.ItemBlockTorchUnlit;
 
@@ -19,8 +17,8 @@ public class ModBlocks
 	public static Block torchBurnt  = new BlockTorchBurnt();
 	public static void init()
 	{
-		GameRegistry.registerBlock(torchLit, ItemBlockTorchLit.class, Reference.MODID + torchLit.getUnlocalizedName().substring(5));
-		GameRegistry.registerBlock(torchUnlit, ItemBlockTorchUnlit.class, Reference.MODID + torchUnlit.getUnlocalizedName().substring(5));
-		RegisterHelper.registerBlock(torchBurnt);
+		GameRegistry.registerBlock(torchLit, ItemBlockTorchLit.class, torchLit.getUnlocalizedName().substring(5));
+		GameRegistry.registerBlock(torchUnlit, ItemBlockTorchUnlit.class, torchUnlit.getUnlocalizedName().substring(5));
+		GameRegistry.registerBlock(torchBurnt, torchBurnt.getUnlocalizedName().substring(5));
 	}
 }

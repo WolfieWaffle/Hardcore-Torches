@@ -8,11 +8,11 @@ public class RegisterHelper
 {
 	public static void registerBlock(Block block)
 	{
-		GameRegistry.registerBlock(block, Reference.MODID + block.getUnlocalizedName().substring(5));
+		GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
 	}
 
 	public static void registerItem(Item item)
 	{
-		GameRegistry.registerItem(item, Reference.MODID + item.getUnlocalizedName().substring(5));
+		GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
 	}
 }

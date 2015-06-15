@@ -1,13 +1,14 @@
 package com.github.wolfiewaffle.hardcoretorches.items;
 
-import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLit;
-import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLit;
+import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 
 public class ItemBlockTorchLit extends ItemBlock
 {
@@ -35,4 +36,18 @@ public class ItemBlockTorchLit extends ItemBlock
 			tickCounter = 0;
 		}
 	}
+	/*
+	@Override
+	public ItemStack onItemRightClick(ItemStack parStack, World parWorld, EntityPlayer parPlayer) {
+	    Vec3 vec3 = parPlayer.getPositionEyes(1.0F);
+	    Vec3 vec31 = parPlayer.getLook(1.0F);
+	    Vec3 vec32 = vec3.addVector(vec31.xCoord * 200, vec31.yCoord * 200, vec31.zCoord * 200);
+	    MovingObjectPosition look = parWorld.rayTraceBlocks(vec3, vec32, true, false, true);
+	    IBlockState state = parWorld.getBlockState(look.getBlockPos());
+	    
+	    if (state.getBlock() == Blocks.water) { 
+	       // do stuff here
+	    }
+	}
+	*/
 }

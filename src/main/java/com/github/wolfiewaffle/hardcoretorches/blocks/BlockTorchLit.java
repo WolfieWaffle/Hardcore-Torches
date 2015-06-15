@@ -120,12 +120,15 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 				world.playSoundEffect(d0, d1, d2, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 		        TileEntity te2 = (TileEntityTorchUnlit)world.getTileEntity(x, y, z);
 		        ((TileEntityTorchUnlit)te2).setFuel(oldFuel);
+		        player.inventory.decrStackSize(player.inventory.currentItem, 1);
 			}
 			
-			if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(Blocks.wool) ||
-				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(Blocks.carpet))
+			if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchUnlit))
 			{
-				player.inventory.decrStackSize(player.inventory.currentItem, 1);
+				//int count = player.inventory.getItemStack().stackSize();
+				//player.inventory.setInventorySlotContents(slot, new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit)));
+				
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit)));
 			}
 		}
 		return true;
