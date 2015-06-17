@@ -25,12 +25,13 @@ import net.minecraftforge.common.ChestGenHooks;
  * Wolfie Waffle: This license is here because this class file is from the SlimeKnights. All credit for these methods and code goes to them!
  */
 @SuppressWarnings("unchecked")
-public class RecipeRemover {
+public class RecipeRemover
+{
 	public static void removeShapedRecipes(List<ItemStack> removelist) {
 		for (ItemStack stack : removelist)
 			removeShapedRecipe(stack);
 	}
-
+	
 	public static void removeAnyRecipe(ItemStack resultItem) {
 		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
 		for (int i = 0; i < recipes.size(); i++) {
@@ -41,7 +42,7 @@ public class RecipeRemover {
 			}
 		}
 	}
-
+	
 	public static void removeAnyRecipe(Item resultItem) {
 		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
 		for (int i = 0; i < recipes.size(); i++) {
@@ -52,7 +53,7 @@ public class RecipeRemover {
 			}
 		}
 	}
-
+	
 	public static void removeShapedRecipe(ItemStack resultItem) {
 		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
 		for (int i = 0; i < recipes.size(); i++) {
@@ -67,7 +68,7 @@ public class RecipeRemover {
 			}
 		}
 	}
-
+	
 	public static void removeShapelessRecipe(ItemStack resultItem) {
 		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
 		for (int i = 0; i < recipes.size(); i++) {
@@ -82,7 +83,7 @@ public class RecipeRemover {
 			}
 		}
 	}
-
+	
 	public static void removeFurnaceRecipe(ItemStack resultItem) {
 		Map<ItemStack, ItemStack> recipes = FurnaceRecipes.smelting().getSmeltingList();
 		for (Iterator<Map.Entry<ItemStack, ItemStack>> entries = recipes.entrySet().iterator(); entries.hasNext(); ) {
@@ -93,15 +94,15 @@ public class RecipeRemover {
 			}
 		}
 	}
-
+	
 	public static void removeFurnaceRecipe(Item i, int metadata) {
 		removeFurnaceRecipe(new ItemStack(i, 1, metadata));
 	}
-
+	
 	public static void removeFurnaceRecipe(Item i) {
 		removeFurnaceRecipe(new ItemStack(i, 1, 32767));
 	}
-
+	
 	//removes from all vanilla worldgen chests :D
 	public static void removeFromChests(ItemStack resultItem) {
 		ChestGenHooks.getInfo(ChestGenHooks.BONUS_CHEST).removeItem(resultItem);
@@ -114,6 +115,5 @@ public class RecipeRemover {
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).removeItem(resultItem);
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).removeItem(resultItem);
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_LIBRARY).removeItem(resultItem);
-
 	}
 }

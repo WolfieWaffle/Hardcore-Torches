@@ -1,7 +1,10 @@
 package com.github.wolfiewaffle.hardcoretorches;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 
+import com.github.wolfiewaffle.hardcoretorches.crafting.RecipeRemover;
 import com.github.wolfiewaffle.hardcoretorches.crafting.Recipes;
 import com.github.wolfiewaffle.hardcoretorches.handlers.DropHandler;
 import com.github.wolfiewaffle.hardcoretorches.help.Reference;
@@ -34,6 +37,7 @@ public class HardcoreTorches
 	{
 		Recipes.init();
 		MinecraftForge.EVENT_BUS.register(new DropHandler());
+		RecipeRemover.removeAnyRecipe(Item.getItemFromBlock(Blocks.torch));
 	}
 	
 	@Mod.EventHandler
