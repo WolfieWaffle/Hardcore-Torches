@@ -2,9 +2,11 @@ package com.github.wolfiewaffle.hardcoretorches.items;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLit;
@@ -19,6 +21,11 @@ public class ItemBlockTorchLit extends ItemBlock
 	}
 	
 	private int tickCounter = 0;
+	
+	public void onCreated(ItemStack itemstack, World world, EntityPlayer player) {
+	    itemstack.stackTagCompound = new NBTTagCompound();
+	    itemstack.stackTagCompound.setInteger("tickCounter", 0);
+	}
 	
 	@Override
 	public void onUpdate(ItemStack itemstack, World world, Entity player, int p0, boolean p1) {

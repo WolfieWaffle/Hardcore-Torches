@@ -161,6 +161,7 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 		        player.inventory.decrStackSize(player.inventory.currentItem, 1);
 			}
 			
+			//Light a held torch
 			if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchUnlit))
 			{
 				ItemStack stack = player.inventory.getStackInSlot(player.inventory.currentItem);
@@ -183,6 +184,33 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 					} else {
 						//world.spawnEntityInWorld(new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit))));
 						player.dropPlayerItemWithRandomChoice(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit)), true);
+					}
+				}
+			}
+			
+			//Light a held coke torch
+			if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchUnlitCoke))
+			{
+				ItemStack stack = player.inventory.getStackInSlot(player.inventory.currentItem);
+				int count = 0;
+				int oldFuel = stack.getItemDamage();
+				
+				//Get the amount of held items
+				if(player.getCurrentEquippedItem() != null) {
+					count = player.getCurrentEquippedItem().stackSize;
+				}
+				
+				//If there is only one torch, just light it
+				if (count == 1) {
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(ModBlocks.torchLitCoke), count, oldFuel));
+				} else if (count > 1) {
+					//Subtract one torch from the stack and give a lit coke torch to the player
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(ModBlocks.torchUnlitCoke), count-1, oldFuel));
+					if (player.inventory.addItemStackToInventory(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLitCoke), 1, oldFuel)) == true) {
+						System.out.println("There was space in the inventory");
+					} else {
+						//world.spawnEntityInWorld(new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit))));
+						player.dropPlayerItemWithRandomChoice(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLitCoke)), true);
 					}
 				}
 			}
