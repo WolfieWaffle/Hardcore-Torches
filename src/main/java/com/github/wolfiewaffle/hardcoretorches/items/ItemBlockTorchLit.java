@@ -20,8 +20,6 @@ public class ItemBlockTorchLit extends ItemBlock
 		setMaxStackSize(1);
 	}
 	
-	private int tickCounter = 0;
-	
 	public void onCreated(ItemStack itemstack, World world, EntityPlayer player) {
 	    itemstack.stackTagCompound = new NBTTagCompound();
 	    itemstack.stackTagCompound.setInteger("tickCounter", 0);
@@ -29,18 +27,21 @@ public class ItemBlockTorchLit extends ItemBlock
 	
 	@Override
 	public void onUpdate(ItemStack itemstack, World world, Entity player, int p0, boolean p1) {
-		if (!world.isRemote) {
-			tickCounter ++;
-			
-			if (tickCounter == 20) {
-				// Increment the damage
+		if (!itemstack.hasTagCompound()) {
+			itemstack.setTagCompound(new NBTTagCompound());
+			itemstack.stackTagCompound.setInteger("tickCounter", 0);
+		} else {
+			if (itemstack.getTagCompound().getInteger("tickCounter") >= 20) {
+				//Increment the damage
 				setDamage(itemstack, getDamage(itemstack) + 1);
 				
-				// If the new damage is greater than the max damage, replace the item with a Burnt Torch
+				//If the new damage is greater than the max damage, replace the item with a burnt torch
 				if (getDamage(itemstack) > getMaxDamage(itemstack)){
 					itemstack.func_150996_a(Item.getItemFromBlock(ModBlocks.torchBurnt));
 				}
-				tickCounter = 0;
+				itemstack.getTagCompound().setInteger("tickCounter", 0);
+			} else {
+				itemstack.getTagCompound().setInteger("tickCounter", itemstack.getTagCompound().getInteger("tickCounter") + 1);
 			}
 		}
 	}
