@@ -161,7 +161,7 @@ public class BlockTorchLitCoke extends BlockTorch implements ITileEntityProvider
 		        player.inventory.decrStackSize(player.inventory.currentItem, 1);
 			}
 			
-			if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchUnlit))
+			if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchUnlitCoke))
 			{
 				ItemStack stack = player.inventory.getStackInSlot(player.inventory.currentItem);
 				int count = 0;

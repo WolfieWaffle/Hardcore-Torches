@@ -105,7 +105,12 @@ public class BlockTorchBurnt extends BlockTorch
 			        }
 			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
 			        ((TileEntityTorchLit)te2).setFuel(MAX_FUEL - oldFuel);
-				};
+				}
+				
+				if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLit))
+				{
+					player.inventory.decrStackSize(player.inventory.currentItem, 1);
+				}
 			}
 		}
 		return true;
