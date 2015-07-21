@@ -15,6 +15,7 @@ public class ItemBlockTorchLitCoke extends ItemBlock
 	public ItemBlockTorchLitCoke(Block block) {
 		super(block);
 		setMaxDamage(BlockTorchLitCoke.MAX_FUEL_COKE);
+		setMaxStackSize(1);
 	}
 	
 	private int tickCounter = 0;
