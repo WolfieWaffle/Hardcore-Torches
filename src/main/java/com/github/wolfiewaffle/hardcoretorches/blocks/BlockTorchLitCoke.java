@@ -22,17 +22,17 @@ import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchUnlit
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
+public class BlockTorchLitCoke extends BlockTorch implements ITileEntityProvider
 {
 	// The maximum fuel of a Lit Torch
-	public static final int MAX_FUEL = 2400;
+	public static final int MAX_FUEL_COKE = BlockTorchLit.MAX_FUEL*2;
 	
 	//Constructor
-	public BlockTorchLit() {
+	public BlockTorchLitCoke() {
 		super();
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		this.setStepSound(soundTypeStone);
-		this.setBlockName("torchLit");
+		this.setBlockName("torchLitCoke");
 		this.setLightLevel(0.8f);
 		this.setBlockTextureName(Reference.MODID + ":" + getUnlocalizedName().substring(5));
 	}
@@ -78,7 +78,7 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 		if((world.isRaining() && world.canBlockSeeTheSky(x, y, z))) {
 	        
 	        //Set world block
-			world.setBlock(x, y, z, ModBlocks.torchUnlit, meta, 3);
+			world.setBlock(x, y, z, ModBlocks.torchUnlitCoke, meta, 3);
 			world.playSoundEffect(d0, d1, d2, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			
 			//Set the fuel value
@@ -150,7 +150,7 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 		        int oldFuel = ((TileEntityTorchLit)world.getTileEntity(x, y, z)).getFuelAmount();
 		        
 		        //Set world block
-				world.setBlock(x, y, z, ModBlocks.torchUnlit, l, 3);
+				world.setBlock(x, y, z, ModBlocks.torchUnlitCoke, l, 3);
 				world.playSoundEffect(d0, d1, d2, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 				
 				//Set the fuel value
@@ -174,15 +174,15 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 				
 				//If there is only one torch, just light it
 				if (count == 1) {
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit), count, oldFuel));
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(ModBlocks.torchLitCoke), count, oldFuel));
 				} else if (count > 1) {
 					//Subtract one torch from the stack and give a lit torch to the player
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(ModBlocks.torchUnlit), count-1, oldFuel));
-					if (player.inventory.addItemStackToInventory(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit), 1, oldFuel)) == true) {
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(ModBlocks.torchUnlitCoke), count-1, oldFuel));
+					if (player.inventory.addItemStackToInventory(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLitCoke), 1, oldFuel)) == true) {
 						System.out.println("There was space in the inventory");
 					} else {
 						//world.spawnEntityInWorld(new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit))));
-						player.dropPlayerItemWithRandomChoice(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit)), true);
+						player.dropPlayerItemWithRandomChoice(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLitCoke)), true);
 					}
 				}
 			}
@@ -198,7 +198,7 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 
 		//Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
 		//itemDamage + fuel = MAX_FUEL
-    	te.setFuel(MAX_FUEL - itemMeta);
+    	te.setFuel(MAX_FUEL_COKE - itemMeta);
     }
     
     //I forgot what this is for...
@@ -224,8 +224,8 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 		TileEntityTorchLit te =  getTileEntity(world, x, y, z);
 		
 		//Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
-		//itemDamage + fuel = MAX_FUEL
-		int itemMeta = MAX_FUEL - te.getFuelAmount();
+		//itemDamage + fuel = MAX_FUEL_COKE
+		int itemMeta = MAX_FUEL_COKE - te.getFuelAmount();
 		
 		ArrayList<ItemStack> drop = new ArrayList<ItemStack>();
 		drop.add(new ItemStack(getItemDropped(metadata, world.rand, fortune), quantityDropped(metadata, fortune, world.rand), itemMeta));

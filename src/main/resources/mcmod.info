@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "hardcoretorches",
+  "name": "Hardcore Torches",
+  "description": "Torches that burn out. Meant as a replacement for Unlit Torches in 1.7.10+.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["Wolfie_Waffle"],
+  "credits": "The Forge and FML guys, Choonster (who helped me so much I could not have made this mod without them) and my cat, for being fluffy.",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

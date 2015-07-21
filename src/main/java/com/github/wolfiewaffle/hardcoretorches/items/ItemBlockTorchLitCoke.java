@@ -7,14 +7,14 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLit;
+import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLitCoke;
 import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 
-public class ItemBlockTorchLit extends ItemBlock
+public class ItemBlockTorchLitCoke extends ItemBlock
 {
-	public ItemBlockTorchLit(Block block) {
+	public ItemBlockTorchLitCoke(Block block) {
 		super(block);
-		setMaxDamage(BlockTorchLit.MAX_FUEL);
+		setMaxDamage(BlockTorchLitCoke.MAX_FUEL_COKE);
 	}
 	
 	private int tickCounter = 0;
@@ -29,7 +29,7 @@ public class ItemBlockTorchLit extends ItemBlock
 			
 			// If the new damage is greater than the max damage, replace the item with a Burnt Torch
 			if (getDamage(itemstack) > getMaxDamage(itemstack)){
-				itemstack.func_150996_a(Item.getItemFromBlock(ModBlocks.torchBurnt));
+				itemstack.func_150996_a(Item.getItemFromBlock(ModBlocks.torchBurntCoke));
 			}
 			tickCounter = 0;
 		}

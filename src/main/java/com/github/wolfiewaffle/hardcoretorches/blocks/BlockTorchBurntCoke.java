@@ -17,17 +17,17 @@ import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchLit;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockTorchBurnt extends BlockTorch
+public class BlockTorchBurntCoke extends BlockTorch
 {
 	// The maximum fuel of a Lit Torch
-	public static final int MAX_FUEL = BlockTorchLit.MAX_FUEL;
+	public static final int MAX_FUEL_COKE = BlockTorchLitCoke.MAX_FUEL_COKE;
 	
-	public BlockTorchBurnt()
+	public BlockTorchBurntCoke()
 	{
 		super();
 		this.setStepSound(soundTypeStone);
 		this.setCreativeTab(CreativeTabs.tabBlock);
-		this.setBlockName("torchBurnt");
+		this.setBlockName("torchBurntCoke");
 		this.setBlockTextureName(Reference.MODID + ":" + getUnlocalizedName().substring(5));
 		this.setTickRandomly(false);
 	}
@@ -64,7 +64,7 @@ public class BlockTorchBurnt extends BlockTorch
 						world.spawnParticle("smoke", d0 - d4, d1 + d3, d2, 0.0D, 0.0D, 0.0D);   
 			        }
 			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
-			        ((TileEntityTorchLit)te2).setFuel(MAX_FUEL - oldFuel);
+			        ((TileEntityTorchLit)te2).setFuel(MAX_FUEL_COKE - oldFuel);
 				}
 				else if (l == 2)
 				{
@@ -74,7 +74,7 @@ public class BlockTorchBurnt extends BlockTorch
 			        	world.spawnParticle("smoke", d0 + d4, d1 + d3, d2, 0.0D, 0.0D, 0.0D);
 			        }
 			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
-			        ((TileEntityTorchLit)te2).setFuel(MAX_FUEL - oldFuel);
+			        ((TileEntityTorchLit)te2).setFuel(MAX_FUEL_COKE - oldFuel);
 				}
 				else if (l == 3)
 				{
@@ -84,7 +84,7 @@ public class BlockTorchBurnt extends BlockTorch
 			        	world.spawnParticle("smoke", d0, d1 + d3, d2 - d4, 0.0D, 0.0D, 0.0D);
 			        }
 			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
-			        ((TileEntityTorchLit)te2).setFuel(MAX_FUEL - oldFuel);
+			        ((TileEntityTorchLit)te2).setFuel(MAX_FUEL_COKE - oldFuel);
 				}
 				else if (l == 4)
 				{
@@ -94,7 +94,7 @@ public class BlockTorchBurnt extends BlockTorch
 			        	world.spawnParticle("smoke", d0, d1 + d3, d2 + d4, 0.0D, 0.0D, 0.0D);
 			        }
 			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
-			        ((TileEntityTorchLit)te2).setFuel(MAX_FUEL - oldFuel);
+			        ((TileEntityTorchLit)te2).setFuel(MAX_FUEL_COKE - oldFuel);
 				}
 				else
 				{
@@ -104,7 +104,7 @@ public class BlockTorchBurnt extends BlockTorch
 			        	world.spawnParticle("smoke", d0, d1, d2, 0.0D, 0.0D, 0.0D);
 			        }
 			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
-			        ((TileEntityTorchLit)te2).setFuel(MAX_FUEL - oldFuel);
+			        ((TileEntityTorchLit)te2).setFuel(MAX_FUEL_COKE - oldFuel);
 				};
 			}
 		}
