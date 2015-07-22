@@ -17,7 +17,8 @@ import net.minecraft.world.World;
 import com.github.wolfiewaffle.hardcoretorches.help.Reference;
 import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchLit;
-import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchUnlit;
+import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchLitCoke;
+import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchUnlitCoke;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -45,7 +46,7 @@ public class BlockTorchLitCoke extends BlockTorch implements ITileEntityProvider
         double d2 = (double)((float)z + 0.5F);
         double d3 = 0.2199999988079071D;
         double d4 = 0.27000001072883606D;
-        int oldFuel = ((TileEntityTorchLit)world.getTileEntity(x, y, z)).getFuelAmount();
+        int oldFuel = ((TileEntityTorchUnlitCoke)world.getTileEntity(x, y, z)).getFuelAmount();
 		
         //Particles
         if (meta == 1)
@@ -82,8 +83,8 @@ public class BlockTorchLitCoke extends BlockTorch implements ITileEntityProvider
 			world.playSoundEffect(d0, d1, d2, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			
 			//Set the fuel value
-	        TileEntity te2 = (TileEntityTorchUnlit)world.getTileEntity(x, y, z);
-	        ((TileEntityTorchUnlit)te2).setFuel(oldFuel);
+	        TileEntity te2 = (TileEntityTorchLitCoke)world.getTileEntity(x, y, z);
+	        ((TileEntityTorchUnlitCoke)te2).setFuel(oldFuel);
 	        
 	        //Not working
 			if (meta == 1) {
@@ -121,19 +122,19 @@ public class BlockTorchLitCoke extends BlockTorch implements ITileEntityProvider
 	//Create the TileEntity
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-        return new TileEntityTorchLit();
+        return new TileEntityTorchLitCoke();
     }
 	
 	//Get TileEntity method
-	private TileEntityTorchLit getTileEntity(World world, int x, int y, int z){
-		return (TileEntityTorchLit) world.getTileEntity(x, y, z);
+	private TileEntityTorchLitCoke getTileEntity(World world, int x, int y, int z){
+		return (TileEntityTorchLitCoke) world.getTileEntity(x, y, z);
 	}
     
 	//Get fuel amount debug
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
-			TileEntityTorchLit te = getTileEntity(world, x, y, z);
+			TileEntityTorchLitCoke te = getTileEntity(world, x, y, z);
 			System.out.printf("Right click. Fuel: %d\n", te.getFuelAmount());
 		}
 		
@@ -154,8 +155,8 @@ public class BlockTorchLitCoke extends BlockTorch implements ITileEntityProvider
 				world.playSoundEffect(d0, d1, d2, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 				
 				//Set the fuel value
-		        TileEntity te2 = (TileEntityTorchUnlit)world.getTileEntity(x, y, z);
-		        ((TileEntityTorchUnlit)te2).setFuel(oldFuel);
+		        TileEntity te2 = (TileEntityTorchLitCoke)world.getTileEntity(x, y, z);
+		        ((TileEntityTorchLitCoke)te2).setFuel(oldFuel);
 		        
 		        //Consume item
 		        player.inventory.decrStackSize(player.inventory.currentItem, 1);
@@ -221,7 +222,7 @@ public class BlockTorchLitCoke extends BlockTorch implements ITileEntityProvider
     //Place block
     @Override
     public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase player, ItemStack itemstack) {
-    	TileEntityTorchLit te = getTileEntity(world, i, j, k);
+    	TileEntityTorchLitCoke te = getTileEntity(world, i, j, k);
     	int itemMeta = itemstack.getItemDamage();
 
 		//Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
@@ -249,7 +250,7 @@ public class BlockTorchLitCoke extends BlockTorch implements ITileEntityProvider
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
     {
-		TileEntityTorchLit te =  getTileEntity(world, x, y, z);
+    	TileEntityTorchLitCoke te =  getTileEntity(world, x, y, z);
 		
 		//Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
 		//itemDamage + fuel = MAX_FUEL_COKE
