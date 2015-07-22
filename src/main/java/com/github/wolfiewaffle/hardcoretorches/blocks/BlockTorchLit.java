@@ -38,7 +38,8 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 	}
 	
 	//Particles and burning out
-	public void updateTick(World world, int x, int y, int z, Random rand) {
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
         double d0 = (double)((float)x + 0.5F);
         double d1 = (double)((float)y + 0.7F);
@@ -113,10 +114,6 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 			}
 		}
 	}
-	
-	//IDK what this is for
-	@SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World p_149734_1_, int p_149734_2_, int p_149734_3_, int p_149734_4_, Random p_149734_5_) {} //Forgot what this is for :/
 	
 	//Create the TileEntity
 	@Override
