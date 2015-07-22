@@ -6,37 +6,13 @@ import net.minecraft.tileentity.TileEntity;
 import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLitCoke;
 import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 
-public class TileEntityTorchLitCoke extends TileEntity 
+public class TileEntityTorchLitCoke extends TileEntityTorchLit
 {
 	public static final String publicName = "tileEntityTorchLitCoke";
-    private String name = "tileEntityTorchLitCoke";
+    @SuppressWarnings("unused")
+	private String name = "tileEntityTorchLitCoke";
     private int tickCounter = 0; 
-    
-    public String getName() {
-    	return name;
-    }
-    
     private int torchFuel = BlockTorchLitCoke.MAX_FUEL_COKE;
-    
-    public int getFuelAmount() {
-		return this.torchFuel;
-	}
-    
-	public void setFuel(int f) {
-		this.torchFuel = f;
-	}
-    
-    @Override
-    public void writeToNBT(NBTTagCompound par1) {
-       super.writeToNBT(par1);
-       par1.setInteger("torchFuelNBT", getFuelAmount());
-    }
-    
-    @Override
-    public void readFromNBT(NBTTagCompound par1) {
-       super.readFromNBT(par1);
-       this.torchFuel = par1.getInteger("torchFuelNBT");
-    }
     
     @Override
     public void updateEntity() {

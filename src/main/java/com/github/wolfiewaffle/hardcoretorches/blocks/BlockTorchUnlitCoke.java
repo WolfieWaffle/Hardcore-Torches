@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 
 import com.github.wolfiewaffle.hardcoretorches.help.Reference;
 import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
-import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchLit;
 import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchLitCoke;
 import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchUnlitCoke;
 
