@@ -3,7 +3,6 @@ package com.github.wolfiewaffle.hardcoretorches.blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
-import net.minecraft.block.BlockTorch;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,7 +22,7 @@ import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchUnlit
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockTorchLitCoke extends BlockTorch implements ITileEntityProvider
+public class BlockTorchLitCoke extends BlockTorchLit implements ITileEntityProvider
 {
 	//The maximum fuel of a Lit Torch
 	public static final int MAX_FUEL_COKE = BlockTorchLit.MAX_FUEL*2;

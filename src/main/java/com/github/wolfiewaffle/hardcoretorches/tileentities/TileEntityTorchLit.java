@@ -5,7 +5,7 @@ import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityTorchLit extends TileEntity 
+public class TileEntityTorchLit extends TileEntity
 {
 	public static final String publicName = "tileEntityTorchLit";
     private String name = "tileEntityTorchLit";

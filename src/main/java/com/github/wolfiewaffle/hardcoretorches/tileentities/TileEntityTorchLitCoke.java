@@ -1,18 +1,41 @@
 package com.github.wolfiewaffle.hardcoretorches.tileentities;
 
+import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLit;
+import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLitCoke;
-import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
-
-public class TileEntityTorchLitCoke extends TileEntityTorchLit
+public class TileEntityTorchLitCoke extends TileEntity
 {
 	public static final String publicName = "tileEntityTorchLitCoke";
-    @SuppressWarnings("unused")
-	private String name = "tileEntityTorchLitCoke";
+    private String name = "tileEntityTorchLitCoke";
     private int tickCounter = 0; 
-    private int torchFuel = BlockTorchLitCoke.MAX_FUEL_COKE;
+    
+    public String getName() {
+    	return name;
+    }
+    
+    private int torchFuel = BlockTorchLit.MAX_FUEL;
+    
+    public int getFuelAmount() {
+		return this.torchFuel;
+	}
+    
+	public void setFuel(int f) {
+		this.torchFuel = f;
+	}
+    
+    @Override
+    public void writeToNBT(NBTTagCompound par1) {
+       super.writeToNBT(par1);
+       par1.setInteger("torchFuelNBT", getFuelAmount());
+    }
+    
+    @Override
+    public void readFromNBT(NBTTagCompound par1) {
+       super.readFromNBT(par1);
+       this.torchFuel = par1.getInteger("torchFuelNBT");
+    }
     
     @Override
     public void updateEntity() {
