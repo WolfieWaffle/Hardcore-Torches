@@ -1,9 +1,10 @@
 package com.github.wolfiewaffle.hardcoretorches.tileentities;
 
-import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLit;
-import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+
+import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLit;
+import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 
 public class TileEntityTorchLit extends TileEntity
 {

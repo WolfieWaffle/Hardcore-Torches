@@ -8,7 +8,6 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -137,7 +136,7 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 		//Extinguish torch
 		if (player.inventory.getCurrentItem() != null)
 		{
-			if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(Blocks.wool) ||
+			/*if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(Blocks.wool) ||
 				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(Blocks.carpet))
 			{
 				int l = world.getBlockMetadata(x, y, z);
@@ -156,7 +155,7 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 		        
 		        //Consume item
 		        player.inventory.decrStackSize(player.inventory.currentItem, 1);
-			}
+			}*/
 			
 			//Light a held torch
 			if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchUnlit))
@@ -172,15 +171,15 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 				
 				//If there is only one torch, just light it
 				if (count == 1) {
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit), count, oldFuel));
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(ModBlocks.torchLitCoke), count, oldFuel));
 				} else if (count > 1) {
 					//Subtract one torch from the stack and give a lit torch to the player
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(ModBlocks.torchUnlit), count-1, oldFuel));
-					if (player.inventory.addItemStackToInventory(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit), 1, oldFuel)) == true) {
+					if (player.inventory.addItemStackToInventory(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLitCoke), 1, oldFuel)) == true) {
 						System.out.println("There was space in the inventory");
 					} else {
 						//world.spawnEntityInWorld(new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit))));
-						player.dropPlayerItemWithRandomChoice(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit)), true);
+						player.dropPlayerItemWithRandomChoice(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLitCoke)), true);
 					}
 				}
 			}
@@ -253,7 +252,7 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 		int itemMeta = MAX_FUEL - te.getFuelAmount();
 		
 		ArrayList<ItemStack> drop = new ArrayList<ItemStack>();
-		drop.add(new ItemStack(getItemDropped(metadata, world.rand, fortune), quantityDropped(metadata, fortune, world.rand), itemMeta));
+		drop.add(new ItemStack(ModBlocks.torchUnlit, quantityDropped(metadata, fortune, world.rand), itemMeta));
 		return drop;
     }
 }

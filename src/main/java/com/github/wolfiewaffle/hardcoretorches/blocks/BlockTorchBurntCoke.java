@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 
 import com.github.wolfiewaffle.hardcoretorches.help.Reference;
 import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
-import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchLit;
 import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchLitCoke;
 
 import cpw.mods.fml.relauncher.Side;
@@ -115,4 +114,9 @@ public class BlockTorchBurntCoke extends BlockTorch
 		}
 		return true;
 	}
+	
+	//Don't drop anything
+    public int quantityDropped(Random p_149745_1_) {
+        return 0;
+    }
 }

@@ -83,7 +83,7 @@ public class BlockTorchLitCoke extends BlockTorchLit implements ITileEntityProvi
 			world.playSoundEffect(d0, d1, d2, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			
 			//Set the fuel value
-	        TileEntity te2 = (TileEntityTorchLitCoke)world.getTileEntity(x, y, z);
+	        TileEntity te2 = (TileEntityTorchUnlitCoke)world.getTileEntity(x, y, z);
 	        ((TileEntityTorchUnlitCoke)te2).setFuel(oldFuel);
 	        
 	        //Not working
@@ -172,16 +172,16 @@ public class BlockTorchLitCoke extends BlockTorchLit implements ITileEntityProvi
 				//If there is only one torch, just light it
 				if (count == 1) {
 					//Replace unlit with lit torch
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit), count, oldFuel));
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(ModBlocks.torchLitCoke), count, oldFuel));
 				} else if (count > 1) {
 					//Subtract one torch from the stack and give a lit torch to the player
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(ModBlocks.torchUnlit), count-1, oldFuel));
 					//If there was space in the inventory
-					if (player.inventory.addItemStackToInventory(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit), 1, oldFuel)) == true) {
+					if (player.inventory.addItemStackToInventory(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLitCoke), 1, oldFuel)) == true) {
 						System.out.println("There was space in the inventory");
 					} else {
 						//Drop the torch on the ground
-						player.dropPlayerItemWithRandomChoice(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit)), true);
+						player.dropPlayerItemWithRandomChoice(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLitCoke)), true);
 					}
 				}
 			}
@@ -256,7 +256,7 @@ public class BlockTorchLitCoke extends BlockTorchLit implements ITileEntityProvi
 		int itemMeta = MAX_FUEL_COKE - te.getFuelAmount();
 		
 		ArrayList<ItemStack> drop = new ArrayList<ItemStack>();
-		drop.add(new ItemStack(getItemDropped(metadata, world.rand, fortune), quantityDropped(metadata, fortune, world.rand), itemMeta));
+		drop.add(new ItemStack(ModBlocks.torchUnlitCoke, quantityDropped(metadata, fortune, world.rand), itemMeta));
 		return drop;
     }
 }

@@ -1,16 +1,9 @@
 package com.github.wolfiewaffle.hardcoretorches.items;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 
 import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLit;
-import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 
 public class ItemBlockTorchLit extends ItemBlock
 {
@@ -20,7 +13,7 @@ public class ItemBlockTorchLit extends ItemBlock
 		setMaxStackSize(1);
 	}
 	
-	public void onCreated(ItemStack itemstack, World world, EntityPlayer player) {
+	/*public void onCreated(ItemStack itemstack, World world, EntityPlayer player) {
 	    itemstack.stackTagCompound = new NBTTagCompound();
 	    itemstack.stackTagCompound.setInteger("tickCounter", 0);
 	}
@@ -44,5 +37,5 @@ public class ItemBlockTorchLit extends ItemBlock
 				itemstack.getTagCompound().setInteger("tickCounter", itemstack.getTagCompound().getInteger("tickCounter") + 1);
 			}
 		}
-	}
+	}*/
 }

@@ -16,7 +16,9 @@ import net.minecraft.world.World;
 
 import com.github.wolfiewaffle.hardcoretorches.help.Reference;
 import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
+import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchLit;
 import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchLitCoke;
+import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchUnlit;
 import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchUnlitCoke;
 
 import cpw.mods.fml.relauncher.Side;
@@ -25,13 +27,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvider
 {
 	// The maximum fuel of a Lit Torch
-	public static final int MAX_FUEL_COKE = BlockTorchLitCoke.MAX_FUEL_COKE;
+	public static final int MAX_FUEL = BlockTorchLit.MAX_FUEL;
 	
 	public BlockTorchUnlitCoke()
 	{
 		super();
 		this.setStepSound(soundTypeStone);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
 		this.setBlockName("torchUnlitCoke");
 		this.setBlockTextureName(Reference.MODID + ":" + getUnlocalizedName().substring(5));
 	}
@@ -56,7 +58,7 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 
 		// Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
 		// itemDamage + fuel = MAX_FUEL
-    	te.setFuel(MAX_FUEL_COKE - itemMeta);
+    	te.setFuel(MAX_FUEL - itemMeta);
     }
     
     //Right click
@@ -71,7 +73,6 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 		if (player.inventory.getCurrentItem() != null)
 		{
 			if (player.inventory.getCurrentItem().getItem() == Items.flint ||
-				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLit) ||
 				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLitCoke))
 			{
 				int l = world.getBlockMetadata(x, y, z);
@@ -83,36 +84,36 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 		        
 				if (l == 1)
 				{
-					int oldFuel = ((TileEntityTorchUnlitCoke)world.getTileEntity(x, y, z)).getFuelAmount();
+					int oldFuel = ((TileEntityTorchUnlit)world.getTileEntity(x, y, z)).getFuelAmount();
 					world.setBlock(x, y, z, ModBlocks.torchLitCoke, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 						world.spawnParticle("smoke", d0 - d4, d1 + d3, d2, 0.0D, 0.0D, 0.0D);   
 			        }
-			        TileEntity te2 = (TileEntityTorchLitCoke)world.getTileEntity(x, y, z);
-			        ((TileEntityTorchLitCoke)te2).setFuel(oldFuel);
+			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
+			        ((TileEntityTorchLit)te2).setFuel(oldFuel);
 				}
 				else if (l == 2)
 				{
-					int oldFuel = ((TileEntityTorchUnlitCoke)world.getTileEntity(x, y, z)).getFuelAmount();
+					int oldFuel = ((TileEntityTorchUnlit)world.getTileEntity(x, y, z)).getFuelAmount();
 					world.setBlock(x, y, z, ModBlocks.torchLitCoke, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 			        	world.spawnParticle("smoke", d0 + d4, d1 + d3, d2, 0.0D, 0.0D, 0.0D);
 			        }
-			        TileEntity te2 = (TileEntityTorchLitCoke)world.getTileEntity(x, y, z);
-			        ((TileEntityTorchLitCoke)te2).setFuel(oldFuel);
+			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
+			        ((TileEntityTorchLit)te2).setFuel(oldFuel);
 				}
 				else if (l == 3)
 				{
-					int oldFuel = ((TileEntityTorchUnlitCoke)world.getTileEntity(x, y, z)).getFuelAmount();
+					int oldFuel = ((TileEntityTorchUnlit)world.getTileEntity(x, y, z)).getFuelAmount();
 					world.setBlock(x, y, z, ModBlocks.torchLitCoke, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 			        	world.spawnParticle("smoke", d0, d1 + d3, d2 - d4, 0.0D, 0.0D, 0.0D);
 			        }
-			        TileEntity te2 = (TileEntityTorchLitCoke)world.getTileEntity(x, y, z);
-			        ((TileEntityTorchLitCoke)te2).setFuel(oldFuel);
+			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
+			        ((TileEntityTorchLit)te2).setFuel(oldFuel);
 				}
 				else if (l == 4)
 				{
@@ -122,8 +123,8 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 			        for(int c = 1; c < 10+1; c++) {
 			        	world.spawnParticle("smoke", d0, d1 + d3, d2 + d4, 0.0D, 0.0D, 0.0D);
 			        }
-			        TileEntity te2 = (TileEntityTorchLitCoke)world.getTileEntity(x, y, z);
-			        ((TileEntityTorchLitCoke)te2).setFuel(oldFuel);
+			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
+			        ((TileEntityTorchLit)te2).setFuel(oldFuel);
 				}
 				else
 				{
@@ -163,11 +164,11 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
     {
-    	TileEntityTorchUnlitCoke te =  getTileEntity(world, x, y, z);
+		TileEntityTorchUnlitCoke te =  getTileEntity(world, x, y, z);
 		
 		// Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
 		// itemDamage + fuel = MAX_FUEL
-		int itemMeta = MAX_FUEL_COKE - te.getFuelAmount();
+		int itemMeta = MAX_FUEL - te.getFuelAmount();
 		
 		ArrayList<ItemStack> drop = new ArrayList<ItemStack>();
 		drop.add(new ItemStack(getItemDropped(metadata, world.rand, fortune), quantityDropped(metadata, fortune, world.rand), itemMeta));

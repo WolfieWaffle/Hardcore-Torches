@@ -1,22 +1,21 @@
 package com.github.wolfiewaffle.hardcoretorches.items;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 
-import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLitCoke;
-import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
+import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLit;
 
 public class ItemBlockTorchLitCoke extends ItemBlock
 {
 	public ItemBlockTorchLitCoke(Block block) {
 		super(block);
-		setMaxDamage(BlockTorchLitCoke.MAX_FUEL_COKE);
+		setMaxDamage(BlockTorchLit.MAX_FUEL*2);
 		setMaxStackSize(1);
+	}
+	
+	/*public void onCreated(ItemStack itemstack, World world, EntityPlayer player) {
+	    itemstack.stackTagCompound = new NBTTagCompound();
+	    itemstack.stackTagCompound.setInteger("tickCounter", 0);
 	}
 	
 	@Override
@@ -29,14 +28,14 @@ public class ItemBlockTorchLitCoke extends ItemBlock
 				//Increment the damage
 				setDamage(itemstack, getDamage(itemstack) + 1);
 				
-				//If the new damage is greater than the max damage, replace the item with a burnt coke torch
+				//If the new damage is greater than the max damage, replace the item with a burnt torch
 				if (getDamage(itemstack) > getMaxDamage(itemstack)){
-					itemstack.func_150996_a(Item.getItemFromBlock(ModBlocks.torchBurntCoke));
+					itemstack.func_150996_a(Item.getItemFromBlock(ModBlocks.torchBurnt));
 				}
 				itemstack.getTagCompound().setInteger("tickCounter", 0);
 			} else {
 				itemstack.getTagCompound().setInteger("tickCounter", itemstack.getTagCompound().getInteger("tickCounter") + 1);
 			}
 		}
-	}
+	}*/
 }

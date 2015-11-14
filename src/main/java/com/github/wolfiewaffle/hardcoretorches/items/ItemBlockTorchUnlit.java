@@ -1,14 +1,9 @@
 package com.github.wolfiewaffle.hardcoretorches.items;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchUnlit;
-import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 
 public class ItemBlockTorchUnlit extends ItemBlock
 {
@@ -16,8 +11,8 @@ public class ItemBlockTorchUnlit extends ItemBlock
 		super(block);
 		setMaxDamage(BlockTorchUnlit.MAX_FUEL);
 	}
-
-	@Override
+	
+	/*@Override
 	public void onUpdate(ItemStack itemstack, World world, Entity player, int p0, boolean p1) {
 		// Increment the damage
 		//setDamage(itemstack, getDamage(itemstack) + 1);
@@ -26,5 +21,5 @@ public class ItemBlockTorchUnlit extends ItemBlock
 		if (getDamage(itemstack) > getMaxDamage(itemstack)){
 			itemstack.func_150996_a(Item.getItemFromBlock(ModBlocks.torchBurnt));
 		}
-	}
+	}*/
 }
