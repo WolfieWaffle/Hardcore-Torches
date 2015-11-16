@@ -30,7 +30,7 @@ public class BlockTorchLitCoke extends BlockTorchLit implements ITileEntityProvi
 	//Constructor
 	public BlockTorchLitCoke() {
 		super();
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
 		this.setStepSound(soundTypeStone);
 		this.setBlockName("torchLitCoke");
 		this.setLightLevel(0.8f);

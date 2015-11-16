@@ -29,7 +29,7 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 	//Constructor
 	public BlockTorchLit() {
 		super();
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
 		this.setStepSound(soundTypeStone);
 		this.setBlockName("torchLit");
 		this.setLightLevel(0.8f);

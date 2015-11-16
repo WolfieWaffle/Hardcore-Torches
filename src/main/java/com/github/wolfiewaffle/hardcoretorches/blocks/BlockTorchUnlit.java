@@ -31,7 +31,7 @@ public class BlockTorchUnlit extends BlockTorch implements ITileEntityProvider
 	{
 		super();
 		this.setStepSound(soundTypeStone);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
 		this.setBlockName("torchUnlit");
 		this.setBlockTextureName(Reference.MODID + ":" + getUnlocalizedName().substring(5));
 	}
@@ -127,7 +127,7 @@ public class BlockTorchUnlit extends BlockTorch implements ITileEntityProvider
 				else
 				{
 					int oldFuel = ((TileEntityTorchUnlit)world.getTileEntity(x, y, z)).getFuelAmount();
-					world.setBlock(x, y, z, ModBlocks.torchLitCoke, l, 3);
+					world.setBlock(x, y, z, ModBlocks.torchLit, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 			        	world.spawnParticle("smoke", d0, d1, d2, 0.0D, 0.0D, 0.0D);

@@ -26,7 +26,7 @@ public class BlockTorchBurnt extends BlockTorch
 	{
 		super();
 		this.setStepSound(soundTypeStone);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
 		this.setBlockName("torchBurnt");
 		this.setBlockTextureName(Reference.MODID + ":" + getUnlocalizedName().substring(5));
 		this.setTickRandomly(false);
