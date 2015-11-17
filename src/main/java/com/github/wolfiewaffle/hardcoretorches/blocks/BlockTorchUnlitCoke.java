@@ -73,7 +73,7 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 		if (player.inventory.getCurrentItem() != null)
 		{
 			if (player.inventory.getCurrentItem().getItem() == Items.flint ||
-				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLitCoke))
+				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLit))
 			{
 				int l = world.getBlockMetadata(x, y, z);
 		        double d0 = (double)((float)x + 0.5F);
@@ -85,7 +85,7 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 				if (l == 1)
 				{
 					int oldFuel = ((TileEntityTorchUnlit)world.getTileEntity(x, y, z)).getFuelAmount();
-					world.setBlock(x, y, z, ModBlocks.torchLitCoke, l, 3);
+					world.setBlock(x, y, z, ModBlocks.torchLit, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 						world.spawnParticle("smoke", d0 - d4, d1 + d3, d2, 0.0D, 0.0D, 0.0D);   
@@ -96,7 +96,7 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 				else if (l == 2)
 				{
 					int oldFuel = ((TileEntityTorchUnlit)world.getTileEntity(x, y, z)).getFuelAmount();
-					world.setBlock(x, y, z, ModBlocks.torchLitCoke, l, 3);
+					world.setBlock(x, y, z, ModBlocks.torchLit, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 			        	world.spawnParticle("smoke", d0 + d4, d1 + d3, d2, 0.0D, 0.0D, 0.0D);
@@ -107,7 +107,7 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 				else if (l == 3)
 				{
 					int oldFuel = ((TileEntityTorchUnlit)world.getTileEntity(x, y, z)).getFuelAmount();
-					world.setBlock(x, y, z, ModBlocks.torchLitCoke, l, 3);
+					world.setBlock(x, y, z, ModBlocks.torchLit, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 			        	world.spawnParticle("smoke", d0, d1 + d3, d2 - d4, 0.0D, 0.0D, 0.0D);
@@ -118,7 +118,7 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 				else if (l == 4)
 				{
 					int oldFuel = ((TileEntityTorchUnlitCoke)world.getTileEntity(x, y, z)).getFuelAmount();
-					world.setBlock(x, y, z, ModBlocks.torchLitCoke, l, 3);
+					world.setBlock(x, y, z, ModBlocks.torchLit, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 			        	world.spawnParticle("smoke", d0, d1 + d3, d2 + d4, 0.0D, 0.0D, 0.0D);
@@ -129,7 +129,7 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 				else
 				{
 					int oldFuel = ((TileEntityTorchUnlitCoke)world.getTileEntity(x, y, z)).getFuelAmount();
-					world.setBlock(x, y, z, ModBlocks.torchLitCoke, l, 3);
+					world.setBlock(x, y, z, ModBlocks.torchLit, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 			        	world.spawnParticle("smoke", d0, d1, d2, 0.0D, 0.0D, 0.0D);

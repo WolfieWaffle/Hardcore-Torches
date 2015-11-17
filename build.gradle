@@ -17,7 +17,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "2.1a"
+version = "2.2a"
 group = "com.github.wolfiewaffle.hardcoretorches" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "hardcoretorches"
 
