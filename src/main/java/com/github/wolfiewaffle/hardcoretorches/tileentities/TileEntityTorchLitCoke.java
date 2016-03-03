@@ -1,9 +1,10 @@
 package com.github.wolfiewaffle.hardcoretorches.tileentities;
 
-import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLit;
-import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+
+import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLitCoke;
+import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 
 public class TileEntityTorchLitCoke extends TileEntity
 {
@@ -15,7 +16,7 @@ public class TileEntityTorchLitCoke extends TileEntity
     	return name;
     }
     
-    private int torchFuel = BlockTorchLit.MAX_FUEL;
+    private int torchFuel = BlockTorchLitCoke.MAX_FUEL;
     
     public int getFuelAmount() {
 		return this.torchFuel;

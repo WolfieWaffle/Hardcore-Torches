@@ -71,7 +71,8 @@ public class BlockTorchUnlit extends BlockTorch implements ITileEntityProvider
 		if (player.inventory.getCurrentItem() != null)
 		{
 			if (player.inventory.getCurrentItem().getItem() == Items.flint ||
-				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLit))
+				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLit) ||
+				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLitCoke))
 			{
 				int l = world.getBlockMetadata(x, y, z);
 		        double d0 = (double)((float)x + 0.5F);

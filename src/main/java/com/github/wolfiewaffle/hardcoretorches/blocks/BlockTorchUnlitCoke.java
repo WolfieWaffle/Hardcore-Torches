@@ -27,7 +27,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvider
 {
 	// The maximum fuel of a Lit Torch
-	public static final int MAX_FUEL = BlockTorchLit.MAX_FUEL;
+	public static final int MAX_FUEL = BlockTorchLit.MAX_FUEL*2;
 	
 	public BlockTorchUnlitCoke()
 	{
@@ -73,7 +73,8 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 		if (player.inventory.getCurrentItem() != null)
 		{
 			if (player.inventory.getCurrentItem().getItem() == Items.flint ||
-				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLit))
+				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLit) ||
+				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLitCoke))
 			{
 				int l = world.getBlockMetadata(x, y, z);
 		        double d0 = (double)((float)x + 0.5F);
@@ -129,7 +130,7 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 				else
 				{
 					int oldFuel = ((TileEntityTorchUnlitCoke)world.getTileEntity(x, y, z)).getFuelAmount();
-					world.setBlock(x, y, z, ModBlocks.torchLit, l, 3);
+					world.setBlock(x, y, z, ModBlocks.torchLitCoke, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 			        	world.spawnParticle("smoke", d0, d1, d2, 0.0D, 0.0D, 0.0D);
