@@ -1,6 +1,8 @@
 # Hardcore-Torches
 1.7.10 Replacement for Unlit Torches
 
-Hardcore Torches is meant to replace Unlit Torches since it has not been updated since 1.6.4.
+This mod adds a torch that will burn out over time. It also adds a torch that lasts twice as long, availible if you have a mod like Railcraft that adds coal coke.
 
-Some textures were used, but if the mod author has any objections I will remove them.
+The mod is mostly unfinished at the moment, but I plan to add more features in the future.
+
+Please report bugs and suggestions to the bug tracker.
