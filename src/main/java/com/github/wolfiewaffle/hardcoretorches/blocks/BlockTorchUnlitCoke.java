@@ -16,9 +16,7 @@ import net.minecraft.world.World;
 
 import com.github.wolfiewaffle.hardcoretorches.help.Reference;
 import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
-import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchLit;
 import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchLitCoke;
-import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchUnlit;
 import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchUnlitCoke;
 
 import cpw.mods.fml.relauncher.Side;
@@ -61,71 +59,74 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
     	te.setFuel(MAX_FUEL - itemMeta);
     }
     
-    //Right click
+    // Right click
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9) {
-		//Debug
+		// Debug
 		if (!world.isRemote) {
 			TileEntityTorchUnlitCoke te = getTileEntity(world, x, y, z);
 			System.out.printf("Right click. Fuel: %d\n", te.getFuelAmount());
 		}
-		
-		//Light torch
-		if (player.inventory.getCurrentItem() != null)
-		{
+
+		// Light torch
+		if (player.inventory.getCurrentItem() != null) {
 			if (player.inventory.getCurrentItem().getItem() == Items.flint ||
 				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLit) ||
-				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLitCoke))
-			{
+				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLitCoke) ||
+				player.inventory.getCurrentItem().getItem() == Items.flint_and_steel) {
+
 				int l = world.getBlockMetadata(x, y, z);
-		        double d0 = (double)((float)x + 0.5F);
-		        double d1 = (double)((float)y + 0.7F);
-		        double d2 = (double)((float)z + 0.5F);
-		        double d3 = 0.2199999988079071D;
-		        double d4 = 0.27000001072883606D;
-		        
-				if (l == 1)
-				{
-					int oldFuel = ((TileEntityTorchUnlit)world.getTileEntity(x, y, z)).getFuelAmount();
-					world.setBlock(x, y, z, ModBlocks.torchLit, l, 3);
+				double d0 = (double) ((float) x + 0.5F);
+				double d1 = (double) ((float) y + 0.7F);
+				double d2 = (double) ((float) z + 0.5F);
+				double d3 = 0.2199999988079071D;
+				double d4 = 0.27000001072883606D;
+
+				if (player.inventory.getCurrentItem().getItem() == Items.flint_and_steel) {
+					player.inventory.getCurrentItem().damageItem(1, player);
+				}
+
+				if (l == 1) {
+					int oldFuel = ((TileEntityTorchUnlitCoke)world.getTileEntity(x, y, z)).getFuelAmount();
+					world.setBlock(x, y, z, ModBlocks.torchLitCoke, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 						world.spawnParticle("smoke", d0 - d4, d1 + d3, d2, 0.0D, 0.0D, 0.0D);   
 			        }
-			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
-			        ((TileEntityTorchLit)te2).setFuel(oldFuel);
+			        TileEntity te2 = (TileEntityTorchLitCoke)world.getTileEntity(x, y, z);
+			        ((TileEntityTorchLitCoke)te2).setFuel(oldFuel);
 				}
 				else if (l == 2)
 				{
-					int oldFuel = ((TileEntityTorchUnlit)world.getTileEntity(x, y, z)).getFuelAmount();
-					world.setBlock(x, y, z, ModBlocks.torchLit, l, 3);
+					int oldFuel = ((TileEntityTorchUnlitCoke)world.getTileEntity(x, y, z)).getFuelAmount();
+					world.setBlock(x, y, z, ModBlocks.torchLitCoke, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 			        	world.spawnParticle("smoke", d0 + d4, d1 + d3, d2, 0.0D, 0.0D, 0.0D);
 			        }
-			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
-			        ((TileEntityTorchLit)te2).setFuel(oldFuel);
+			        TileEntity te2 = (TileEntityTorchLitCoke)world.getTileEntity(x, y, z);
+			        ((TileEntityTorchLitCoke)te2).setFuel(oldFuel);
 				}
 				else if (l == 3)
 				{
-					int oldFuel = ((TileEntityTorchUnlit)world.getTileEntity(x, y, z)).getFuelAmount();
-					world.setBlock(x, y, z, ModBlocks.torchLit, l, 3);
+					int oldFuel = ((TileEntityTorchUnlitCoke)world.getTileEntity(x, y, z)).getFuelAmount();
+					world.setBlock(x, y, z, ModBlocks.torchLitCoke, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 			        	world.spawnParticle("smoke", d0, d1 + d3, d2 - d4, 0.0D, 0.0D, 0.0D);
 			        }
-			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
-			        ((TileEntityTorchLit)te2).setFuel(oldFuel);
+			        TileEntity te2 = (TileEntityTorchLitCoke)world.getTileEntity(x, y, z);
+			        ((TileEntityTorchLitCoke)te2).setFuel(oldFuel);
 				}
 				else if (l == 4)
 				{
 					int oldFuel = ((TileEntityTorchUnlitCoke)world.getTileEntity(x, y, z)).getFuelAmount();
-					world.setBlock(x, y, z, ModBlocks.torchLit, l, 3);
+					world.setBlock(x, y, z, ModBlocks.torchLitCoke, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 			        for(int c = 1; c < 10+1; c++) {
 			        	world.spawnParticle("smoke", d0, d1 + d3, d2 + d4, 0.0D, 0.0D, 0.0D);
 			        }
-			        TileEntity te2 = (TileEntityTorchLit)world.getTileEntity(x, y, z);
-			        ((TileEntityTorchLit)te2).setFuel(oldFuel);
+			        TileEntity te2 = (TileEntityTorchLitCoke)world.getTileEntity(x, y, z);
+			        ((TileEntityTorchLitCoke)te2).setFuel(oldFuel);
 				}
 				else
 				{
@@ -140,8 +141,7 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 				};
 			}
 			
-			if (player.inventory.getCurrentItem().getItem() == Items.flint && !player.capabilities.isCreativeMode)
-			{
+			if (player.inventory.getCurrentItem().getItem() == Items.flint && !player.capabilities.isCreativeMode) {
 				player.inventory.decrStackSize(player.inventory.currentItem, 1);
 			}
 		}

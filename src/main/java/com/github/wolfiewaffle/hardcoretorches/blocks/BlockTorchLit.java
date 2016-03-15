@@ -3,6 +3,7 @@ package com.github.wolfiewaffle.hardcoretorches.blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockTorch;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.creativetab.CreativeTabs;
@@ -36,7 +37,7 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 		this.setBlockTextureName(Reference.MODID + ":" + getUnlocalizedName().substring(5));
 	}
 	
-	//Particles and burning out
+	// Particles and burning out
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
@@ -47,7 +48,7 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
         double d4 = 0.27000001072883606D;
         int oldFuel = ((TileEntityTorchLit)world.getTileEntity(x, y, z)).getFuelAmount();
 		
-        //Particles
+        // Particles
         if (meta == 1)
         {
             world.spawnParticle("smoke", d0 - d4, d1 + d3, d2, 0.0D, 0.0D, 0.0D);
@@ -132,91 +133,56 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 			TileEntityTorchLit te = getTileEntity(world, x, y, z);
 			System.out.printf("Right click. Fuel: %d\n", te.getFuelAmount());
 		}
-		
-		//Extinguish torch
+
 		if (player.inventory.getCurrentItem() != null)
 		{
-			/*
-			 * if (player.inventory.getCurrentItem().getItem() ==
-			 * Item.getItemFromBlock(Blocks.wool) ||
-			 * player.inventory.getCurrentItem().getItem() ==
-			 * Item.getItemFromBlock(Blocks.carpet)) { int l =
-			 * world.getBlockMetadata(x, y, z); double d0 = (double)((float)x +
-			 * 0.5F); double d1 = (double)((float)y + 0.7F); double d2 =
-			 * (double)((float)z + 0.5F); int oldFuel =
-			 * ((TileEntityTorchLit)world.getTileEntity(x, y,
-			 * z)).getFuelAmount();
-			 * 
-			 * //Set world block world.setBlock(x, y, z, ModBlocks.torchUnlit,
-			 * l, 3); world.playSoundEffect(d0, d1, d2, "random.fizz", 0.5F,
-			 * 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
-			 * 
-			 * //Set the fuel value TileEntity te2 =
-			 * (TileEntityTorchUnlit)world.getTileEntity(x, y, z);
-			 * ((TileEntityTorchUnlit)te2).setFuel(oldFuel);
-			 * 
-			 * //Consume item
-			 * player.inventory.decrStackSize(player.inventory.currentItem, 1);
-			 * }
-			 */
-			
-			//Light a held torch
-			if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchUnlit))
-			{
-				ItemStack stack = player.inventory.getStackInSlot(player.inventory.currentItem);
-				int count = 0;
-				int oldFuel = stack.getItemDamage();
-				
-				//Get the amount of held items
-				if(player.getCurrentEquippedItem() != null) {
-					count = player.getCurrentEquippedItem().stackSize;
-				}
-				
-				//If there is only one torch, just light it
-				if (count == 1) {
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit), count, oldFuel));
-				} else if (count > 1) {
-					//Subtract one torch from the stack and give a lit torch to the player
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(ModBlocks.torchUnlit), count-1, oldFuel));
-					if (player.inventory.addItemStackToInventory(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit), 1, oldFuel)) == true) {
-						System.out.println("There was space in the inventory");
-					} else {
-						//world.spawnEntityInWorld(new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit))));
-						player.dropPlayerItemWithRandomChoice(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit)), true);
-					}
-				}
-			}
-			
-			//Light a held coke torch
-			if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchUnlitCoke))
-			{
-				ItemStack stack = player.inventory.getStackInSlot(player.inventory.currentItem);
-				int count = 0;
-				int oldFuel = stack.getItemDamage();
-				
-				//Get the amount of held items
-				if(player.getCurrentEquippedItem() != null) {
-					count = player.getCurrentEquippedItem().stackSize;
-				}
-				
-				//If there is only one torch, just light it
-				if (count == 1) {
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(ModBlocks.torchLitCoke), count, oldFuel));
-				} else if (count > 1) {
-					//Subtract one torch from the stack and give a lit coke torch to the player
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(ModBlocks.torchUnlitCoke), count-1, oldFuel));
-					if (player.inventory.addItemStackToInventory(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLitCoke), 1, oldFuel)) == true) {
-						System.out.println("There was space in the inventory");
-					} else {
-						//world.spawnEntityInWorld(new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(Item.getItemFromBlock(ModBlocks.torchLit))));
-						player.dropPlayerItemWithRandomChoice(new ItemStack(Item.getItemFromBlock(ModBlocks.torchLitCoke)), true);
-					}
-				}
+			// Light a held torch
+			if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchUnlit) ||
+				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchUnlitCoke)) {
+				lightHeldTorch(player);
 			}
 		}
 		return true;
     }
-    
+
+    protected void lightHeldTorch(EntityPlayer player) {
+		ItemStack stack = player.inventory.getStackInSlot(player.inventory.currentItem);
+		int count = 0;
+		int oldFuel = stack.getItemDamage();
+		Block torch;
+		Block torch2;
+
+		// Decide what torch to use
+		if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchUnlit)) {
+			torch = ModBlocks.torchLit;
+			torch2 = ModBlocks.torchUnlit;
+		} else if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchUnlitCoke)) {
+			torch = ModBlocks.torchLitCoke;
+			torch2 = ModBlocks.torchUnlitCoke;
+		} else {
+			torch = ModBlocks.torchLit;
+			torch2 = ModBlocks.torchUnlit;
+		}
+
+		// Get the amount of held items
+		if(player.getCurrentEquippedItem() != null) {
+			count = player.getCurrentEquippedItem().stackSize;
+		}
+
+		// If there is only one torch, just light it
+		if (count == 1) {
+			player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.getItemFromBlock(torch), count, oldFuel));
+		} else if (count > 1) {
+			// Subtract one torch from the stack and give a lit torch to the player
+			player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(torch2, count-1, oldFuel));
+
+			if (player.inventory.addItemStackToInventory(new ItemStack(Item.getItemFromBlock(torch), 1, oldFuel)) == true) {
+			} else {
+				player.dropPlayerItemWithRandomChoice(new ItemStack(Item.getItemFromBlock(torch)), true);
+			}
+		}
+    }
+
     //Place block
     @Override
     public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase player, ItemStack itemstack) {
@@ -243,7 +209,7 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
       super.harvestBlock(world, player, x, y, z, meta);
       world.setBlockToAir(x, y, z);
     }
-    
+
     //Get drops
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)

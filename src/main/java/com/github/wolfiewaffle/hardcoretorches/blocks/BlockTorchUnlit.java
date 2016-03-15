@@ -68,19 +68,23 @@ public class BlockTorchUnlit extends BlockTorch implements ITileEntityProvider
 		}
 		
 		//Light torch
-		if (player.inventory.getCurrentItem() != null)
-		{
+		if (player.inventory.getCurrentItem() != null) {
 			if (player.inventory.getCurrentItem().getItem() == Items.flint ||
 				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLit) ||
-				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLitCoke))
-			{
+				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLitCoke) ||
+				player.inventory.getCurrentItem().getItem() == Items.flint_and_steel) {
+
 				int l = world.getBlockMetadata(x, y, z);
 		        double d0 = (double)((float)x + 0.5F);
 		        double d1 = (double)((float)y + 0.7F);
 		        double d2 = (double)((float)z + 0.5F);
 		        double d3 = 0.2199999988079071D;
 		        double d4 = 0.27000001072883606D;
-		        
+
+				if (player.inventory.getCurrentItem().getItem() == Items.flint_and_steel) {
+					player.inventory.getCurrentItem().damageItem(1, player);
+				}
+
 				if (l == 1)
 				{
 					int oldFuel = ((TileEntityTorchUnlit)world.getTileEntity(x, y, z)).getFuelAmount();
@@ -138,8 +142,7 @@ public class BlockTorchUnlit extends BlockTorch implements ITileEntityProvider
 				};
 			}
 			
-			if (player.inventory.getCurrentItem().getItem() == Items.flint && !player.capabilities.isCreativeMode)
-			{
+			if ((player.inventory.getCurrentItem().getItem() == Items.flint) && !player.capabilities.isCreativeMode) {
 				player.inventory.decrStackSize(player.inventory.currentItem, 1);
 			}
 		}
