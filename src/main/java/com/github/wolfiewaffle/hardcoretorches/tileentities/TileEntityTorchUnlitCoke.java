@@ -36,7 +36,7 @@ public class TileEntityTorchUnlitCoke extends TileEntity
        super.readFromNBT(par1);
        this.torchFuel = par1.getInteger("torchFuelNBT");
     }
-    
+
     @Override
     public void updateEntity() {
 		if (worldObj.isRemote){ return; }
@@ -46,7 +46,7 @@ public class TileEntityTorchUnlitCoke extends TileEntity
 		
 		if (torchFuel <= 0) { // If the new fuel value is less than 0, replace the block with a Burnt Torch
 			System.out.printf("Torch at %d,%d,%d has burnt (fuel %d)\n", xCoord, yCoord, zCoord, torchFuel);
-    		this.worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.torchBurntCoke, worldObj.getBlockMetadata(xCoord, yCoord, zCoord), 3);
+    		this.worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.torchBurnt, worldObj.getBlockMetadata(xCoord, yCoord, zCoord), 3);
     	}
     }
 }

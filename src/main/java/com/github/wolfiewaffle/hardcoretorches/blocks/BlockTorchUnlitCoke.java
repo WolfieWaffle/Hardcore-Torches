@@ -3,7 +3,6 @@ package com.github.wolfiewaffle.hardcoretorches.blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
-import net.minecraft.block.BlockTorch;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,11 +21,11 @@ import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchUnlit
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvider
+public class BlockTorchUnlitCoke extends BlockTorchUnlit implements ITileEntityProvider
 {
 	// The maximum fuel of a Lit Torch
-	public static final int MAX_FUEL = BlockTorchLit.MAX_FUEL*2;
-	
+	public static final int MAX_FUEL = BlockTorchLitCoke.MAX_FUEL;
+
 	public BlockTorchUnlitCoke()
 	{
 		super();
@@ -35,11 +34,11 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 		this.setBlockName("torchUnlitCoke");
 		this.setBlockTextureName(Reference.MODID + ":" + getUnlocalizedName().substring(5));
 	}
-	
+
 	@Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World p_149734_1_, int p_149734_2_, int p_149734_3_, int p_149734_4_, Random p_149734_5_) {}
-	
+
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
         return new TileEntityTorchUnlitCoke();
@@ -48,7 +47,7 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 	private TileEntityTorchUnlitCoke getTileEntity(World world, int x, int y, int z){
 		return (TileEntityTorchUnlitCoke)world.getTileEntity(x, y, z);
 	}
-	
+
     @Override
     public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase player, ItemStack itemstack) {
     	TileEntityTorchUnlitCoke te = getTileEntity(world, i, j, k);
@@ -58,16 +57,16 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 		// itemDamage + fuel = MAX_FUEL
     	te.setFuel(MAX_FUEL - itemMeta);
     }
-    
-    // Right click
+
+    //Right click
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9) {
-		// Debug
+		//Debug
 		if (!world.isRemote) {
 			TileEntityTorchUnlitCoke te = getTileEntity(world, x, y, z);
 			System.out.printf("Right click. Fuel: %d\n", te.getFuelAmount());
 		}
 
-		// Light torch
+		//Light torch
 		if (player.inventory.getCurrentItem() != null) {
 			if (player.inventory.getCurrentItem().getItem() == Items.flint ||
 				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLit) ||
@@ -75,17 +74,18 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 				player.inventory.getCurrentItem().getItem() == Items.flint_and_steel) {
 
 				int l = world.getBlockMetadata(x, y, z);
-				double d0 = (double) ((float) x + 0.5F);
-				double d1 = (double) ((float) y + 0.7F);
-				double d2 = (double) ((float) z + 0.5F);
-				double d3 = 0.2199999988079071D;
-				double d4 = 0.27000001072883606D;
+		        double d0 = (double)((float)x + 0.5F);
+		        double d1 = (double)((float)y + 0.7F);
+		        double d2 = (double)((float)z + 0.5F);
+		        double d3 = 0.2199999988079071D;
+		        double d4 = 0.27000001072883606D;
 
 				if (player.inventory.getCurrentItem().getItem() == Items.flint_and_steel) {
 					player.inventory.getCurrentItem().damageItem(1, player);
 				}
 
-				if (l == 1) {
+				if (l == 1)
+				{
 					int oldFuel = ((TileEntityTorchUnlitCoke)world.getTileEntity(x, y, z)).getFuelAmount();
 					world.setBlock(x, y, z, ModBlocks.torchLitCoke, l, 3);
 					world.playSoundEffect(d0, d1, d2, "fire.ignite", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
@@ -140,14 +140,14 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
 			        ((TileEntityTorchLitCoke)te2).setFuel(oldFuel);
 				};
 			}
-			
-			if (player.inventory.getCurrentItem().getItem() == Items.flint && !player.capabilities.isCreativeMode) {
+
+			if ((player.inventory.getCurrentItem().getItem() == Items.flint) && !player.capabilities.isCreativeMode) {
 				player.inventory.decrStackSize(player.inventory.currentItem, 1);
 			}
 		}
 		return true;
 	}
-	
+
     @Override
     public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest) {
       if(willHarvest) {
@@ -155,17 +155,17 @@ public class BlockTorchUnlitCoke extends BlockTorch implements ITileEntityProvid
       }
       return super.removedByPlayer(world, player, x, y, z, willHarvest);
     }
-    
+
     @Override
     public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta) {
       super.harvestBlock(world, player, x, y, z, meta);
       world.setBlockToAir(x, y, z);
     }
-    
+
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
     {
-		TileEntityTorchUnlitCoke te =  getTileEntity(world, x, y, z);
+    	TileEntityTorchUnlitCoke te =  getTileEntity(world, x, y, z);
 		
 		// Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
 		// itemDamage + fuel = MAX_FUEL

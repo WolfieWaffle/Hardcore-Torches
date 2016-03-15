@@ -9,6 +9,7 @@ config/
 crash-reports/
 options.txt
 usernamecache.json
+mods/
 
 #################
 ## Eclipse

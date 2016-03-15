@@ -1,11 +1,10 @@
 package com.github.wolfiewaffle.hardcoretorches.items;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
 
 import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchLit;
 
-public class ItemBlockTorchLitCoke extends ItemBlock
+public class ItemBlockTorchLitCoke extends ItemBlockTorchLit
 {
 	public ItemBlockTorchLitCoke(Block block) {
 		super(block);
