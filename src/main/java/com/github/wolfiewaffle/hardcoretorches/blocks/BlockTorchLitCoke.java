@@ -22,10 +22,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTorchLitCoke extends BlockTorchLit implements ITileEntityProvider
 {
-	//The maximum fuel of a Lit Torch
 	public static final int MAX_FUEL_COKE = BlockTorchLit.MAX_FUEL*2;
-	
-	//Constructor
+
 	public BlockTorchLitCoke() {
 		super();
 		this.setCreativeTab(CreativeTabs.tabDecorations);
@@ -34,7 +32,7 @@ public class BlockTorchLitCoke extends BlockTorchLit implements ITileEntityProvi
 		this.setLightLevel(0.8f);
 		this.setBlockTextureName(Reference.MODID + ":" + getUnlocalizedName().substring(5));
 	}
-	
+
 	//Particles and burning out
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
@@ -113,18 +111,15 @@ public class BlockTorchLitCoke extends BlockTorchLit implements ITileEntityProvi
 		}
 	}
 
-	//Create the TileEntity
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
         return new TileEntityTorchLitCoke();
     }
 
-	//Get TileEntity method
 	private TileEntityTorchLitCoke getTileEntity(World world, int x, int y, int z){
 		return (TileEntityTorchLitCoke) world.getTileEntity(x, y, z);
 	}
 
-	//Get fuel amount debug
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
@@ -142,8 +137,7 @@ public class BlockTorchLitCoke extends BlockTorchLit implements ITileEntityProvi
 		}
 		return true;
     }
-    
-    //Place block
+
     @Override
     public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase player, ItemStack itemstack) {
     	TileEntityTorchLitCoke te = getTileEntity(world, i, j, k);
@@ -153,24 +147,23 @@ public class BlockTorchLitCoke extends BlockTorchLit implements ITileEntityProvi
 		//itemDamage + fuel = MAX_FUEL
     	te.setFuel(MAX_FUEL_COKE - itemMeta);
     }
-    
-    //I forgot what this is for...
-    @Override
-    public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest) {
-      if(willHarvest) {
-        return true;
-      }
-      return super.removedByPlayer(world, player, x, y, z, willHarvest);
-    }
-    
-    //Harvest method, needs to be modified for some reason I forgot
-    @Override
-    public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta) {
-      super.harvestBlock(world, player, x, y, z, meta);
-      world.setBlockToAir(x, y, z);
-    }
-    
-    //Get drops
+
+	// I forgot what this is for...
+	@Override
+	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest) {
+		if (willHarvest) {
+			return true;
+		}
+		return super.removedByPlayer(world, player, x, y, z, willHarvest);
+	}
+
+	// Harvest method, needs to be modified for some reason I forgot
+	@Override
+	public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta) {
+		super.harvestBlock(world, player, x, y, z, meta);
+		world.setBlockToAir(x, y, z);
+	}
+
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
     {

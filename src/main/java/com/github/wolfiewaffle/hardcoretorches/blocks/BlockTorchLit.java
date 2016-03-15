@@ -24,10 +24,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 {
-	// The maximum fuel of a Lit Torch
 	public static final int MAX_FUEL = 2400;
-	
-	//Constructor
+
 	public BlockTorchLit() {
 		super();
 		this.setCreativeTab(CreativeTabs.tabDecorations);
@@ -36,7 +34,7 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 		this.setLightLevel(0.8f);
 		this.setBlockTextureName(Reference.MODID + ":" + getUnlocalizedName().substring(5));
 	}
-	
+
 	// Particles and burning out
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
@@ -114,20 +112,17 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 			}
 		}
 	}
-	
-	//Create the TileEntity
+
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-        return new TileEntityTorchLit();
-    }
-	
-	//Get TileEntity method
-	private TileEntityTorchLit getTileEntity(World world, int x, int y, int z){
+		return new TileEntityTorchLit();
+	}
+
+	private TileEntityTorchLit getTileEntity(World world, int x, int y, int z) {
 		return (TileEntityTorchLit) world.getTileEntity(x, y, z);
 	}
-    
-	//Get fuel amount debug
-    @Override
+
+	@Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
 			TileEntityTorchLit te = getTileEntity(world, x, y, z);
@@ -183,18 +178,17 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
 		}
     }
 
-    //Place block
     @Override
     public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase player, ItemStack itemstack) {
     	TileEntityTorchLit te = getTileEntity(world, i, j, k);
     	int itemMeta = itemstack.getItemDamage();
 
-		//Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
-		//itemDamage + fuel = MAX_FUEL
+		// Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
+		// itemDamage + fuel = MAX_FUEL
     	te.setFuel(MAX_FUEL - itemMeta);
     }
-    
-    //I forgot what this is for...
+
+    // I forgot what this is for...
     @Override
     public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest) {
       if(willHarvest) {
@@ -202,24 +196,23 @@ public class BlockTorchLit extends BlockTorch implements ITileEntityProvider
       }
       return super.removedByPlayer(world, player, x, y, z, willHarvest);
     }
-    
-    //Harvest method, needs to be modified for some reason I forgot
-    @Override
-    public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta) {
-      super.harvestBlock(world, player, x, y, z, meta);
-      world.setBlockToAir(x, y, z);
-    }
 
-    //Get drops
+	// Harvest method, needs to be modified for some reason I forgot
+	@Override
+	public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta) {
+		super.harvestBlock(world, player, x, y, z, meta);
+		world.setBlockToAir(x, y, z);
+	}
+
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
     {
 		TileEntityTorchLit te =  getTileEntity(world, x, y, z);
-		
-		//Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
-		//itemDamage + fuel = MAX_FUEL
+
+		// Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
+		// itemDamage + fuel = MAX_FUEL
 		int itemMeta = MAX_FUEL - te.getFuelAmount();
-		
+
 		ArrayList<ItemStack> drop = new ArrayList<ItemStack>();
 		drop.add(new ItemStack(ModBlocks.torchUnlit, quantityDropped(metadata, fortune, world.rand), itemMeta));
 		return drop;
