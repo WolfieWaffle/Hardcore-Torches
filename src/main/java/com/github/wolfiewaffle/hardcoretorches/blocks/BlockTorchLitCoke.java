@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import com.github.wolfiewaffle.hardcoretorches.HardcoreTorches;
 import com.github.wolfiewaffle.hardcoretorches.help.Reference;
 import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchLitCoke;
@@ -22,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTorchLitCoke extends BlockTorchLit implements ITileEntityProvider
 {
-	public static final int MAX_FUEL_COKE = BlockTorchLit.MAX_FUEL*2;
+	public static final int MAX_FUEL = HardcoreTorches.configTorchBurnTimeCoke;
 
 	public BlockTorchLitCoke() {
 		super();
@@ -145,7 +146,7 @@ public class BlockTorchLitCoke extends BlockTorchLit implements ITileEntityProvi
 
 		//Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
 		//itemDamage + fuel = MAX_FUEL
-    	te.setFuel(MAX_FUEL_COKE - itemMeta);
+    	te.setFuel(MAX_FUEL - itemMeta);
     }
 
 	// I forgot what this is for...
@@ -171,7 +172,7 @@ public class BlockTorchLitCoke extends BlockTorchLit implements ITileEntityProvi
 		
 		//Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
 		//itemDamage + fuel = MAX_FUEL_COKE
-		int itemMeta = MAX_FUEL_COKE - te.getFuelAmount();
+		int itemMeta = MAX_FUEL - te.getFuelAmount();
 		
 		ArrayList<ItemStack> drop = new ArrayList<ItemStack>();
 		drop.add(new ItemStack(ModBlocks.torchUnlitCoke, quantityDropped(metadata, fortune, world.rand), itemMeta));

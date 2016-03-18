@@ -3,7 +3,7 @@ package com.github.wolfiewaffle.hardcoretorches.tileentities;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-import com.github.wolfiewaffle.hardcoretorches.blocks.BlockTorchUnlit;
+import com.github.wolfiewaffle.hardcoretorches.HardcoreTorches;
 import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 
 public class TileEntityTorchUnlit extends TileEntity 
@@ -15,7 +15,7 @@ public class TileEntityTorchUnlit extends TileEntity
     	return name;
     }
     
-    private int torchFuel = BlockTorchUnlit.MAX_FUEL;
+    private int torchFuel = HardcoreTorches.configTorchBurnTime;
     
     public int getFuelAmount() {
 		return this.torchFuel;

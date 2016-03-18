@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import com.github.wolfiewaffle.hardcoretorches.HardcoreTorches;
 import com.github.wolfiewaffle.hardcoretorches.help.Reference;
 import com.github.wolfiewaffle.hardcoretorches.init.ModBlocks;
 import com.github.wolfiewaffle.hardcoretorches.tileentities.TileEntityTorchLit;
@@ -25,7 +26,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockTorchUnlit extends BlockTorch implements ITileEntityProvider
 {
 	// The maximum fuel of a Lit Torch
-	public static final int MAX_FUEL = BlockTorchLit.MAX_FUEL;
+	public static final int MAX_FUEL = HardcoreTorches.configTorchBurnTime;
 	
 	public BlockTorchUnlit()
 	{
