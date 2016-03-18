@@ -4,7 +4,7 @@
   "name": "Hardcore Torches",
   "description": "Torches that burn out. Meant as a replacement for Unlit Torches in 1.7.10+.",
   "version": "${version}",
-  "mcversion": "${mcversion}",
+  "mcversion": "1.7.10",
   "url": "",
   "updateUrl": "",
   "authorList": ["Wolfie_Waffle"],

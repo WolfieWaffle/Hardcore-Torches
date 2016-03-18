@@ -26,6 +26,12 @@ public class HardcoreTorches
     public static final String NAME = "Hardcore Torches";
     public static final String VERSION = "@VERSION@";
 
+    // Config options
+	public static int configTorchBurnTime;
+	public static int configTorchBurnTimeCoke;
+	public static boolean configLightInInventory;
+	public static boolean configLightWithTorches;
+
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
 
@@ -36,6 +42,8 @@ public class HardcoreTorches
 		config.load();
 		configTorchBurnTime = config.getInt("torch burn time", Configuration.CATEGORY_GENERAL, 2400, Integer.MIN_VALUE, Integer.MAX_VALUE, "The burn time of a regular torch in ticks.");
 		configTorchBurnTimeCoke = config.getInt("coke torch burn time", Configuration.CATEGORY_GENERAL, 4800, Integer.MIN_VALUE, Integer.MAX_VALUE, "The burn time of a coke torch in ticks. Usually 2x torch burn time.");
+		configLightInInventory = config.getBoolean("light in inventory", Configuration.CATEGORY_GENERAL, true, "Can torches be lit inside the inventory/crafting menu?");
+		configLightWithTorches = config.getBoolean("light with torches", Configuration.CATEGORY_GENERAL, true, "Can lit torches be used to light other torches?");
 		config.save();	
 	}
 
@@ -55,7 +63,4 @@ public class HardcoreTorches
 	{
 
 	}
-
-	public static int configTorchBurnTime;
-	public static int configTorchBurnTimeCoke;
 }

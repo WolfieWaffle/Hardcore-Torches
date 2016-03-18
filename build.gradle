@@ -17,13 +17,16 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.1"
+version = "${mod_version}"
 group = "com.github.wolfiewaffle.hardcoretorches" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "hardcoretorches"
 
 minecraft {
     version = "1.7.10-10.13.3.1408-1.7.10"
     runDir = "eclipse"
+	
+	replace "@VERSION@", project.version
+    replaceIn "HardcoreTorches.java"
 }
 
 dependencies {
@@ -42,22 +45,19 @@ dependencies {
 
 }
 
-processResources
-{
-    // this will ensure that this task is redone when the versions change.
+processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
-	
-    // replace stuff in mcmod.info, nothing else
+
     from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-		
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        include '**/*.info'
+        include '**/*.properties'
+
+        expand 'version': project.version, 'mcversion': project.minecraft.version
     }
-    
-    // copy everything else, thats not the mcmod.info
+
     from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+        exclude '**/*.info'
+        exclude '**/*.properties'
     }
 }

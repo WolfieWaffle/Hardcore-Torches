@@ -70,9 +70,10 @@ public class BlockTorchUnlitCoke extends BlockTorchUnlit implements ITileEntityP
 		//Light torch
 		if (player.inventory.getCurrentItem() != null) {
 			if (player.inventory.getCurrentItem().getItem() == Items.flint ||
-				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLit) ||
-				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLitCoke) ||
-				player.inventory.getCurrentItem().getItem() == Items.flint_and_steel) {
+				player.inventory.getCurrentItem().getItem() == Items.flint_and_steel ||
+				((player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLit) ||
+				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchLitCoke)) &&
+				HardcoreTorches.configLightWithTorches)) {
 
 				int l = world.getBlockMetadata(x, y, z);
 		        double d0 = (double)((float)x + 0.5F);

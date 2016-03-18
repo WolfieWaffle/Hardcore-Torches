@@ -131,8 +131,9 @@ public class BlockTorchLitCoke extends BlockTorchLit implements ITileEntityProvi
 		if (player.inventory.getCurrentItem() != null)
 		{
 			// Light a held torch
-			if (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchUnlit) ||
-				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchUnlitCoke)) {
+			if ((player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchUnlit) ||
+				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(ModBlocks.torchUnlitCoke)) &&
+				HardcoreTorches.configLightInInventory) {
 				lightHeldTorch(player);
 			}
 		}
